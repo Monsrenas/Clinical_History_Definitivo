@@ -14,17 +14,37 @@ class PatientController extends Controller
     }
 
 
-    public function show($id) {
-      return Patient::find($id);
+    public function pfind(Request $request)
+    {	
+    	$ert=strval($request->identification);
+    	$patient = Patient::where('identification','=', $ert)->first();
+    	if (count($patient)>0){ $identification=$patient->identification;
+    							return view('history.patientcreate')->with('patient',$patient);
+    			 				}
+    	else { return view('history.patientcreate')->with('identification',$ert); }	
+	}
+
+    public function show($request) {
+      return Patient::find($request);
     }
 
     public function store(Request $request)
-    {
 
-       $pasiente = Patient::create(['name' => ['John'=>'Medico']]);
+    {	return $request;
+       /*$pasiente = Patient::create(['name' => ['John'=>'Medico']]);  creacion de colecciones anidadas*/
 
-       /*$pasiente= $request;     
-       return Patient::create($pasiente->all());*/  
+       $ert=strval($request->identification);
+
+       $patient = Patient::where('identification','=', $ert)->first();
+    	if (count($patient)>0){ $identification=$patient->identification;
+    							  $patient->update($request->all());
+    							  return $patient;
+    			 				}
+    		else { $patient = Patient::create($request->all()); 
+			    	return view('history.patientcreate')->with('patient',$patient);		
+    		}	 					
+
+       
     }
 
     public function update(Request $request, $id)

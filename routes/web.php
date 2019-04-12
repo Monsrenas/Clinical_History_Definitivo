@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('history.patientcreate');
+	$identification='44444444444';
+    return view('history.patientcreate')->with($identification);
 });
 
-
+Route::post('pfind','PatientController@pfind');
 Route::post('add','PatientController@store');
 Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
