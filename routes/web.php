@@ -18,6 +18,8 @@ Route::get('/', function () {
 
 Route::post('pfind','PatientController@pfind');
 Route::post('add','PatientController@store');
+Route::post('save','PatientController@saveCurrentMedication');
+
 Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
 Route::post('edit/{id}','PatientController@update');

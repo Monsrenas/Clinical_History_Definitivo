@@ -1,7 +1,7 @@
 <?php
 function paises(){
 ?>
-		<select name="nationality" id="nation">
+		<select name="nationality" id="nation" required>
 		<option value="AF" >Afganistán</option>
 		<option value="AL" >Albania</option>
 		<option value="DZ" >Argelia</option>

@@ -36,33 +36,45 @@
     @endif
 
     @if (isset($patient))
-           <?php $identification=$patient->identification; ?> 
+           <?php $identification=$patient->identification; 
+                    $patientActive=true;
+           ?>
     @else         
            <?php                     
             $patient=new Patient;
-            if (!isset($identification)) {$identification="12";}
+            if (!isset($identification)) {$identification="";}
+             $patientActive=false;
+           
             ?>           
     @endif
 
-         <div class="row">
+    <?php $specialties= ["Last Medical History",
+                        "Current Medication",
+                        "Social History", 
+                        "Family History",
+                        "Surgical History",
+                        "Sustance Use",
 
+                                        ] ?>
 
-		<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="row">
+
+        <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#dpatient">PATIENT DATA<?php echo "<br>" ?> {{ $patient->name."   ".$patient->surname."   [".$patient->identification."]" }} </button>
+
+		<div class="col-xs-12 col-sm-12 col-md-12 collapse" id="dpatient">
     
-            <button type="button" class="btn btn-primary btn-lg btn-block">Patient Data</button>
+            
 
             <form  action="{{url('pfind')}}" method="post">
-            @csrf
+                @csrf
                 <div class="form-inline">
                     <div class="form-group">
 
                         <strong> Identification: </strong>
-                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15">
+                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
                          <button type="submit" class="btn btn-primary">Find</button>
                     </div>    
                 </div>
-                   
-                
             </form>
        
 
@@ -81,27 +93,29 @@
                 <div class="form-inline">
                             <div class="form-group">
                                 <strong>Surname:</strong>
-                                <input type="text" name="surname" class="form-inline" placeholder="Patien surame" value="{{ $patient->surname }}">
+                                <input type="text" name="surname" class="form-inline" placeholder="Patien surame" value="{{ $patient->surname }}" required>
                             </div>
             		        <div class="form-group">
             		            <strong>Name:</strong>
-            		            <input type="text" name="name" value="{{ $patient->name }}" class="form-inline" placeholder="Patien name">
+            		            <input type="text" name="name" value="{{ $patient->name }}" class="form-inline" placeholder="Patien name" required>
             		        </div>
                             <div class="form-group">
                                 <strong>Date of Birth:</strong>
-                                <input type="date" name="DOB" value="{{ $patient->DOB }}" class="form-inline" placeholder="">
+                                <input type="date" name="DOB" value="{{ $patient->DOB }}" class="form-inline" placeholder="" required>
                             </div>
                 </div>
+
+                <?php $sexo=strval($patient->sex); ?>
 
                 <div class="form-inline">
                             <div class="form-group">
                                 
                                 <div class="form-check form-check-inline">
                                     <strong>Sex:</strong>
-                                  <input class="form-check-input" type="radio" name="sex" id="sex" value="M">
+                                  <input class="form-check-input" type="radio" name="sex" id="sex" value="M" <?php if ($sexo=="M") {echo "checked";}?> required>
                                   <label class="form-check-label" for="sex1">M</label>
 
-                                  <input class="form-check-input" type="radio" name="sex" id="sex2" value="F">
+                                  <input class="form-check-input" type="radio" name="sex" id="sex2" value="F" <?php if ($sexo=="F") { echo "checked"; } ?>  required>
                                   <label class="form-check-label" for="sex2">F</label>
                                 </div>
 
@@ -109,7 +123,7 @@
 
                             <div class="form-group">
                                 <strong>Marital Status:</strong>
-                                <select name="maritalStts"id="marital">
+                                <select name="maritalStts"id="marital" required>
                                     <option value="S" >Single</option>
                                     <option value="M" >Married</option>
                                     <option value="D" >Divorced</option>
@@ -122,18 +136,18 @@
                 <div class="form-inline">
                             <div class="form-group">
                                 <strong>Address:</strong>
-                                <input type="text" name="addres" value="{{ $patient->addres }}" class="form-inline" placeholder="Address"  maxlength="85" size="85" >
+                                <input type="text" name="addres" value="{{ $patient->addres }}" class="form-inline" placeholder="Address"  maxlength="85" size="85" required>
                             </div>
                 </div>
 
                 <div class="form-inline">
                             <div class="form-group">
                                 <strong>Telephone:</strong>
-                                 <input type="text" name="telephone" value="{{ $patient->telephone }}" placeholder="telephone number" id="inputNumero" onkeypress="return soloNumeros(event);">
+                                 <input type="text" name="telephone" value="{{ $patient->telephone }}" placeholder="telephone number" id="inputNumero" onkeypress="return soloNumeros(event);" required>
                             </div>
                             <div class="form-group">
                                 <strong>Email:</strong>
-                                <input type="email" name="email" value="{{ $patient->email }}" class="form-inline" placeholder="email">
+                                <input type="email" name="email" value="{{ $patient->email }}" class="form-inline" placeholder="email" required>
                             </div>
 
                 </div>
@@ -141,11 +155,11 @@
                 <div class="form-inline" >
                             <div class="form-group">
                                 <strong>Next of kin:</strong>
-                                <input type="text" name="nxOfKin" value="{{ $patient->nxOfKin }}" class="form-inline" placeholder="Near relative">
+                                <input type="text" name="nxOfKin" value="{{ $patient->nxOfKin }}" class="form-inline" placeholder="Near relative" required>
                             </div>
                             <div class="form-group">
                                 <strong>Relationship:</strong>
-                                <select name="relation" id="myrelation" >
+                                <select name="relation" id="myrelation" required>
                                     <option value="SP" >Spouse</option>
                                     <option value="PR" >Parents</option>
                                     <option value="SB" >Siblings</option>
@@ -166,18 +180,34 @@
                 <div class="form-inline">
                             <div class="form-group">
                                 <strong>Contact information:</strong>
-                                <input type="text" name="contact" value="{{ $patient->contact }}" class="form-inline" placeholder="Contac Infotmation"  maxlength="70" size="70">
+                                <input type="text" name="contact" value="{{ $patient->contact }}" class="form-inline" placeholder="Contac Infotmation"  maxlength="70" size="70" required>
                             </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <br>
+                </div>
 
+            </form>
 		    </div>
-
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		      <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
-		</div>
-    </form>
-
+ 
+        
+	</div> <!-- Fin del <div class="row ">  -->
+        @if ($patientActive)
+            
+            <?php $i=0; ?>
+            @foreach($specialties as $image)
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <?php $i=$i+1; ?>
+                        <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#A{{strval($i) }}">{{$image}}  </button>
+                        <div class="col-xs-12 col-sm-12 col-md-12 collapse" id="A{{strval($i) }}">
+                            @include("history.partials.CurrentMedication")
+                        </div>
+                    </div>
+                </div>    
+            @endforeach
+        @endif   
     <script>
  
         /**
@@ -212,7 +242,7 @@
 
 
 
-        function iniSelect(elm, vlr){  document.getElementById(elm).value=vlr; alert(vlr); }
+        function iniSelect(elm, vlr){  document.getElementById(elm).value=vlr;}
 
         iniSelect("nation",nation);
         iniSelect("myrelation",srelation);

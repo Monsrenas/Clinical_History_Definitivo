@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Patient;
 
 class PatientController extends Controller
-{
+{    
+    public function saveCurrentMedication(Request $request){
+
+        return $request;
+    }
     
     public function index()
     {
@@ -30,20 +34,20 @@ class PatientController extends Controller
 
     public function store(Request $request)
 
-    {	return $request;
+    {	
        /*$pasiente = Patient::create(['name' => ['John'=>'Medico']]);  creacion de colecciones anidadas*/
 
        $ert=strval($request->identification);
 
        $patient = Patient::where('identification','=', $ert)->first();
     	if (count($patient)>0){ $identification=$patient->identification;
-    							  $patient->update($request->all());
-    							  return $patient;
+    							  $patient->update($request->all()); 
     			 				}
-    		else { $patient = Patient::create($request->all()); 
-			    	return view('history.patientcreate')->with('patient',$patient);		
+    			 				
+    		else { if (!$request->identification=null) $patient = Patient::create($request->all()); 
+			    			
     		}	 					
-
+    	return view('history.patientcreate')->with('patient',$patient);	
        
     }
 
@@ -58,4 +62,6 @@ class PatientController extends Controller
     $patient->delete();
     return 204;  
 	}
+
+
 }
