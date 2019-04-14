@@ -40,9 +40,8 @@
         </div>
         <a href="javascript:addmedicalcondition()" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Other condition</a>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <br>
-    </div>
+        	<button type="submit" class="btn btn-primary">Submit</button>
+    	</div>
 </form>
 
 <script type="text/javascript">

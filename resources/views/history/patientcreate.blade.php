@@ -199,10 +199,14 @@
             @foreach($specialties as $image)
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <?php $i=$i+1; ?>
+                        <?php 
+                            $filename=str_replace(" ", "", $specialties[$i]);
+                            $i=$i+1; ?>
                         <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#A{{strval($i) }}">{{$image}}  </button>
                         <div class="col-xs-12 col-sm-12 col-md-12 collapse" id="A{{strval($i) }}">
-                            @include("history.partials.CurrentMedication")
+                            @if ($i<5)
+                            @include("history.partials.".$filename)
+                            @endif
                         </div>
                     </div>
                 </div>    
