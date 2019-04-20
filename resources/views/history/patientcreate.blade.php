@@ -54,11 +54,12 @@
                         "Family History",
                         "Surgical History",
                         "Sustance Use",
-
+                        "PhysicalExamination",
+                        "PHYSICIANS NOTE"
                                         ] ?>
 
     <div class="row">
-
+        
         <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#dpatient">PATIENT DATA<?php echo "<br>" ?> {{ $patient->name."   ".$patient->surname."   [".$patient->identification."]" }} </button>
 
 		<div class="col-xs-12 col-sm-12 col-md-12 collapse" id="dpatient">
@@ -204,7 +205,7 @@
                             $i=$i+1; ?>
                         <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#A{{strval($i) }}">{{$image}}  </button>
                         <div class="col-xs-12 col-sm-12 col-md-12 collapse" id="A{{strval($i) }}">
-                            @if ($i<5)
+                            @if ($i<9)
                             @include("history.partials.".$filename)
                             @endif
                         </div>
@@ -265,5 +266,45 @@
                                                                          };
                                       }
       
+    
+function ajaxRenderSection(url) {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                $('#principalPanel').empty().append($(data)); 
+            },
+            error: function (data) {
+                var errors = data.responseJSON;
+                if (errors) {
+                    $.each(errors, function (i) {
+                        console.log(errors[i]);
+                    });
+                }
+            }
+        });
+    }
+
+
+     $.fn.ajaxPost = function(url,method,sectionToRender) {
+        $.ajax({
+            type: method,
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                ajaxRenderSection(sectionToRender)
+            },
+            error: function (data) {
+                var errors = data.responseJSON;
+                if (errors) {
+                    $.each(errors, function (i) {
+                        console.log(errors[i]);
+                    });
+                }
+            }
+        });
+    }
+    
     </script>
 @endsection
