@@ -17,8 +17,8 @@
 <?php 
 	$family=["Father","Mther","Siblings","Children"];
  ?>
-<form  action="{{url('save')}}" method="post">
-	@csrf 	
+<form  action="#" method="post">
+@csrf 	
 <div class="form-group">
 	<table id="medications">
 		<tr>
@@ -114,6 +114,6 @@
 	</div>	
 </div>
 	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button type="submit" class="btn btn-primary">Submit</button>
+       	<button onclick="pide(identification,'LastMedical')" class="btn btn-primary">Submit</button>
     </div>
 </form>

@@ -49,7 +49,8 @@
             ?>
 @extends('history.layout')
 
-@section('content')
+@section('eltema')
+
     <style type="text/css">
         .form-inline { font-family: arial, helvetica, sans-serif; 
                  margin-top: 10px;
@@ -65,7 +66,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Clinical History</h2>
+                <h2>Patient Data</h2>
             </div>
         </div>
     </div>
@@ -95,21 +96,18 @@
     @endif
 
     
-    <?php $specialties= ["Last Medical History",
-                        "Current Medication",
-                        "Social History", 
-                        "Family History",
-                        "Surgical History",
-                        "Sustance Use",
-                        "PhysicalExamination",
-                        "PHYSICIANS NOTE"
-                                        ] ?>
+    <?php 
+    if(!isset($_SESSION)){
+    session_start();
+}
+    if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';} 
+                        ?>
 
     <div class="row">
         
-        <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#dpatient">PATIENT DATA<?php echo "<br>" ?> {{ $patient->name."   ".$patient->surname."   [".$patient->identification."]" }} </button>
+      
 
-		<div class="col-xs-12 col-sm-12 col-md-12 collapse" id="dpatient">
+		<div class="col-xs-12 col-sm-12 col-md-12" id="dpatient">
     
             
             <!--{{url('pfind')}}-->
@@ -123,7 +121,7 @@
                         <strong> Identification: </strong>
                         <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" id="identification" required>
 
-                          <button type="submit" class="btn btn-primary">Prueba</button>
+                          <button type="submit" class="btn btn-primary">Find it</button>
                     </div>    
                 </div>
             </form>
@@ -235,7 +233,7 @@
                             </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                     <br>
                 </div>
 
@@ -244,26 +242,6 @@
  
         
 	</div> <!-- Fin del <div class="row ">  -->
-
-        @if ($patientActive)
-            
-            <?php $i=0; ?>
-            @foreach($specialties as $image)
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <?php 
-                            $filename=str_replace(" ", "", $specialties[$i]);
-                            $i=$i+1; ?>
-                        <button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#A{{strval($i) }}">{{$image}}  </button>
-                        <div class="col-xs-12 col-sm-12 col-md-12 collapse" id="A{{strval($i) }}">
-                            @if ($i<9)
-                            @include("history.partials.".$filename)
-                            @endif
-                        </div>
-                    </div>
-                </div>    
-            @endforeach
-        @endif 
           
     <script>
  

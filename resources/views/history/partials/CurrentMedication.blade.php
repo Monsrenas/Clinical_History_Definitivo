@@ -1,4 +1,9 @@
-<form  action="{{url('save')}}" method="post">
+<?php 
+use App\Lastmedical;
+$clasedat= new Lastmedical;
+ ?>
+
+<form  action="{{url('Genfind')}}" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="ndrug" id="ndrug"  value=''>
