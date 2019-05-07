@@ -19,10 +19,7 @@ Route::get('FamilyHistory', 'PatientController@FamilyHistoryfind');
 Route::get('SurgicalHistory', 'PatientController@SurgicalHistoryfind');
 Route::get('SustanceUse', 'PatientController@SustanceUsefind');
 Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
-
-Route::get('/PHYSICIANSNOTE', function () { return view('history.PHYSICIANSNOTE'); });
-
-
+Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
 
 Route::post('almacena', 'PatientController@almacena');
 

@@ -2,8 +2,8 @@
 
 @section('eltema')
 <?php use App\Physical; ?>
-
-  @if (isset($patient))
+		
+@if (isset($patient))
            <?php $identification=$patient->identification;  ?>
  @else         
            <?php                     
@@ -12,6 +12,15 @@
              $patientActive=false;
             ?>  
 @endif
+
+@if (isset($_SESSION['identification']))
+           <?php 
+           		$identification=($_SESSION['identification']);  
+			?>
+@endif
+
+<?php global $patient1;
+			$patient1=$patient;?>
 
 <style type="text/css">
 	table {
@@ -30,6 +39,7 @@
 <form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
 	@csrf 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
+
 	<input type="hidden" name="url"  value='history.PhysicalExamination'>
 	<input type="hidden" name="dtt"  value='6'>
 	<?php 	
@@ -37,9 +47,10 @@
 	   include(app_path().'/includes/categorys.php');
 
 	   global $indiceradio,$indicetext;
-
+	   
 	   $indiceradio=0;
 	   $indicetext=0;
+	   
 
 	  function indice($x) { global $indiceradio,$indicetext;
 	  						if ($x==1) { $i=$indiceradio;
@@ -49,17 +60,25 @@
 	  									$indicetext=$indicetext+1;
 	  									return $i;}				 
 	  					}
-
-	  function decifra($cadena) { 
+	  				
+	  function decifra($cadena) {
+			global $patient1;	
+	 	
 	  		$resu="<td colspan='4'>".$cadena."</td>";
-	  		if ($cadena=="***") { $i=indice(1); 
-	  			$resu=" <td width='10'> <input type='radio' name='N[$i]' id='N{{$i}}'  value='N'> </td> 
-	  					<td width='10'> <input type='radio' name='N[$i]' id='AN{{$i}}' value='AN' ></td>
-	  					<td width='10'> <input type='radio' name='N[$i]' id='NE{{$i}}' value='NE'> </td> ";}
+	  		if ($cadena=="***") { $i=indice(1);
+	  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="N")) {$Nck="checked";} else {$Nck="";} 
+	  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="AN")) {$ANck="checked";} else {$ANck="";}
+	  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="NE")) {$NEck="checked";} else {$NEck="";}
+	  			
+	  			$resu=" <td width='10'> <input type='radio' name='N[$i]' id='N$i'  value='N' ".$Nck." > </td> 
+	  					<td width='10'> <input type='radio' name='N[$i]' id='AN$i' value='AN' ".$ANck." ></td>
+	  					<td width='10'> <input type='radio' name='N[$i]' id='NE$i' value='NE' ".$NEck." > </td> ";}
 	  		if (substr($cadena, 0,1)=="#") {$i=indice(2); 
 	  					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
-	  					$resu="<td colspan='".substr($cadena, 1,1)."'>".substr($cadena, 2)." <input type='text' name='".$nomb."' size='5' value='{{ $patient->".$nomb."}}' </td>";}
-	  		if ($cadena=="DAF") { $resu="<td rowspan='90'> <textarea style='resize: none;' rows = '100%' cols = '80%' name = 'DAF'>	{{$patient->DAF}} </textarea> </td>"; }
+	  					$valor=$patient1->$nomb;
+$resu="<td colspan='".substr($cadena, 1,1)."'>".substr($cadena, 2)." <input type='text' name='".$nomb."' size='5' 
+		value='".$valor."' </td>";}
+	  		if ($cadena=="DAF") { $resu="<td rowspan='90'> <textarea style='resize: none;' rows = '100%' cols = '80%' name = 'DAF'>	 </textarea> </td>"; }
 
 	  		if ($cadena=="...") {$i=indice(1);
 	  			 $resu=" <input type='radio' name='N[$i]' value='N'> 
@@ -113,6 +132,7 @@
 
 		<tr> <td rowspan="4">Neck</td>   <td colspan="3">Anterior</td> <?php echo decifra("***");?> </tr>
 		<tr> <td colspan="3">Posterior</td>	<?php echo decifra("***");?> </tr>
+
 		<tr> <td colspan="3">Lateral</td>	<?php echo decifra("***");?> </tr>
 		<tr> <td colspan="3">Supraclavicular</td> <?php echo decifra("***");?> </tr>
 
@@ -161,8 +181,12 @@
 	</table>
 
 		
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button type="submit" class="btn btn-primary">Submit</button>
+	<div  style="position: fixed; 
+    height: 30px; 
+    bottom:0; 
+    right:1; 
+    width: 100%;">
+       	<button type="submit" class="btn btn-primary" >Save</button>
     </div>
 
 </form>

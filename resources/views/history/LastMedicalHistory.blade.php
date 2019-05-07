@@ -12,11 +12,11 @@
  ?>
 
  @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+           <?php $identification=$patient->identification;  
+           ?>
 
 @endif
-                    
-
+    
 <script type="text/javascript">
 	
 		function rellenacheck($name) {

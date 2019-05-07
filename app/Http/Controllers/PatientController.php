@@ -10,6 +10,7 @@ use App\Familyhistory;
 use App\Surgicalhistory;
 use App\Sustanceuse;
 use App\Physical;
+use App\Physiciansnote;
 
 
 if(!isset($_SESSION)){
@@ -90,13 +91,18 @@ class PatientController extends Controller
 
     public function LastMedicalHistoryfind(Request $request)
     {   
-        $ert=strval($request->identification);
+    
+        if (isset($_SESSION['identification'])) {
+                    $ert=$_SESSION['identification'];}
+            else { $ert=''; }
 
+         /* 
         if ($ert=='') { if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';}
         else { $ert=$_SESSION['identification'];}
-        }
+        }*/
         
         $patient = Lastmedical::where('identification','=', $ert)->first();
+    
         if (count($patient)>0){ return view('history.LastMedicalHistory')->with('patient',$patient);
                                 }
         else { return view('history.LastMedicalHistory')->with('identification',$ert); }   
@@ -127,19 +133,21 @@ class PatientController extends Controller
     case '6':
          return $tmodelo= new Physical;
         break;
-}
+    case '7':
+         return $tmodelo= new Physiciansnote;
+        break;
+        }
     }
 
-
-
-
     public function Genfind($request, $classdata)
-    {   $ert=strval($request->identification);
-
-        if ($ert=='') { if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';}
-        else { $ert=$_SESSION['identification'];}
-
+    {   
+        if (isset($_SESSION['identification'])) {
+                    $ert=$_SESSION['identification'];}
+            else { $ert=strval($request->identification); }
+         /*   
         }
+        if ($ert=='') { if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';}
+        else { $ert=$_SESSION['identification'];} }*/
 
         $patient = $classdata::where('identification','=', $ert)->first();  
         $ert=strval($request->identification);         
@@ -165,7 +173,7 @@ class PatientController extends Controller
 
        $patient = $classdata::where('identification','=', $ert)->first();
         if (count($patient)>0){ $patient->update($request->all()); }                
-            else { if (!$request->identification=null) $patient = $classdata::create($request->all()); }                       
+            else { if (!$request->identification='') $patient = $classdata::create($request->all()); }                       
         return $patient; 
     }
 
@@ -212,6 +220,12 @@ class PatientController extends Controller
     {   $classdata=$this->modelo('6');   
         $result=$this->Genfind($request, $classdata);
         return view('history.PhysicalExamination')->with('patient',$result); 
+    }
+
+      public function PHYSICIANSNOTEfind(Request $request)
+    {   $classdata=$this->modelo('7');   
+        $result=$this->Genfind($request, $classdata);
+        return view('history.PHYSICIANSNOTE')->with('patient',$result); 
     }
 
     
