@@ -27,7 +27,7 @@ class PatientController extends Controller
 
 
     public function pfind(Request $request)
-    {	
+    {	/*se esta actualizando*/
        
         $ert=strval($request->identification);
 
