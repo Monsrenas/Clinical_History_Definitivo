@@ -51,7 +51,7 @@ class PatientController extends Controller
                                                         return response()->json(["data"=>$patient]);
                                                         } 
                                     $identification=$patient->identification;
-                                return view('history.patientcreate')->with('patient',$patient);
+                                return view('history.PATIENTDATA')->with('patient',$patient);
                                 }
         else { if ($request->ajax()) {  return response()->json([ "identification"=>$ert ]);  } 
             }   
@@ -74,7 +74,7 @@ class PatientController extends Controller
     	if (!is_null($patient)){ $identification=$patient->identification;
     							  $patient->update($request->all());         }		 				
     		else { if (!$request->identification=null) $patient = Patient::create($request->all()); }	 					
-    	return view('history.patientcreate')->with('patient',$patient);	
+    	return view('history.PATIENTDATA')->with('patient',$patient);	
     }
 
     public function update(Request $request, $id)
