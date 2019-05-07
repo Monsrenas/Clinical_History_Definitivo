@@ -71,7 +71,7 @@ class PatientController extends Controller
        $ert=strval($request->identification);
 
        $patient = Patient::where('identification','=', $ert)->first();
-    	if (count($patient)>0){ $identification=$patient->identification;
+    	if (!is_null($patient)){ $identification=$patient->identification;
     							  $patient->update($request->all());         }		 				
     		else { if (!$request->identification=null) $patient = Patient::create($request->all()); }	 					
     	return view('history.patientcreate')->with('patient',$patient);	
@@ -103,7 +103,7 @@ class PatientController extends Controller
         
         $patient = Lastmedical::where('identification','=', $ert)->first();
     
-        if (count($patient)>0){ return view('history.LastMedicalHistory')->with('patient',$patient);
+        if (!is_null($patient)){ return view('history.LastMedicalHistory')->with('patient',$patient);
                                 }
         else { return view('history.LastMedicalHistory')->with('identification',$ert); }   
     }
@@ -172,7 +172,7 @@ class PatientController extends Controller
         else { $ert=$_SESSION['identification'];}
 
        $patient = $classdata::where('identification','=', $ert)->first();
-        if (count($patient)>0){ $patient->update($request->all()); }                
+        if (!is_null($patient)){ $patient->update($request->all()); }                
             else { if (!$request->identification='') $patient = $classdata::create($request->all()); }                       
         return $patient; 
     }
