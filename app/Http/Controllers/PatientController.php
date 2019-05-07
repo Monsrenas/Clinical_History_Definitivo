@@ -35,7 +35,7 @@ class PatientController extends Controller
         else { $ert=$_SESSION['identification'];}
         }
     	$patient = Patient::where('identification','=', $ert)->first();
-    	if (count($patient)>0){ $identification=$patient->identification;
+    	if (!is_null($patient)) { $identification=$patient->identification;
                                 $_SESSION['identification'] = $identification;
     							return view('history.PATIENTDATA')->with('patient',$patient);
     			 				}
