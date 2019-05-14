@@ -37,6 +37,7 @@ class PatientController extends Controller
     	$patient = Patient::where('identification','=', $ert)->first();
     	if (!is_null($patient)) { $identification=$patient->identification;
                                 $_SESSION['identification'] = $identification;
+                                $_SESSION['name']=$patient->name." ".$patient->surname;
     							return view('history.PATIENTDATA')->with('patient',$patient);
     			 				}
     	else { return view('history.PATIENTDATA')->with('identification',$ert); }	
@@ -72,9 +73,13 @@ class PatientController extends Controller
 
        $patient = Patient::where('identification','=', $ert)->first();
     	if (!is_null($patient)){ $identification=$patient->identification;
-    							  $patient->update($request->all());         }		 				
-    		else { if (!$request->identification=null) $patient = Patient::create($request->all()); }	 					
-    	return view('history.PATIENTDATA')->with('patient',$patient);	
+    							  $patient->update($request->all());  
+                                  $_SESSION['identification'] = $request->identification; 
+                                  $_SESSION['name']=$patient->name." ".$patient->surname;       }		 				
+    		else { if (!$request->identification=null) $patient = Patient::create($request->all()); 
+                           $_SESSION['identification'] = $request->identification; 
+                           $_SESSION['name']=$patient->name." ".$patient->surname;}	 					
+    	return view('/history.PATIENTDATA')->with('patient',$patient);	
     }
 
     public function update(Request $request, $id)

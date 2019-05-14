@@ -35,6 +35,45 @@ if(!isset($_SESSION)){
 
 </head>
 <body>
+
+<style type="text/css">
+    nav.navbar {
+    background-color: #265C8A;
+}
+.navbar-inverse .nav li a{
+  color: yellow  !important; 
+}
+
+/*Mouse encima*/
+.navbar-inverse .nav li a:hover{
+  color: red;
+}
+</style>
+
+@if (!isset($_SESSION['identification']))  
+     <?php $_SESSION['identification']=''; ?> 
+@endif 
+@if (!isset($_SESSION['name'])) 
+    <?php  $_SESSION['name']='';  ?> 
+@endif 
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Clinical History</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+    <div>
+        Patient: {{ $_SESSION['identification'] }}  {{ $_SESSION['name'] }}
+    </div>
+</nav>
+
+
 <div class="container">
     @yield('content')
  

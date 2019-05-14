@@ -23,13 +23,9 @@ Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
 
 Route::post('almacena', 'PatientController@almacena');
 
-
-
-
 Route::post('pfind','PatientController@pfind');
 
 Route::post('add','PatientController@store');
-/*Route::post('save','PatientController@saveCurrentMedication');*/
 Route::post('Genfind','PatientController@Genfind');
 
 Route::get('patient`','PatientController@index');
