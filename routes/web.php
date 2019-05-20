@@ -22,15 +22,13 @@ Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
 Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
 
 Route::post('almacena', 'PatientController@almacena');
-
 Route::post('pfind','PatientController@pfind');
-
 Route::post('add','PatientController@store');
 Route::post('Genfind','PatientController@Genfind');
 
-Route::get('patient`','PatientController@index');
+/*Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
 Route::post('edit/{id}','PatientController@update');
-Route::delete('{id}','PatientController@destroy');
+Route::delete('{id}','PatientController@destroy');*/
 
 
