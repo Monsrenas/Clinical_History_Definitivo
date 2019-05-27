@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'PatientController@pfind');
 Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
 Route::get('/CurrentMedication', 'PatientController@CurrentMedicationfind');
@@ -25,6 +26,10 @@ Route::post('almacena', 'PatientController@almacena');
 Route::post('pfind','PatientController@pfind');
 Route::post('add','PatientController@store');
 Route::post('Genfind','PatientController@Genfind');
+
+Route::get('/login', function () {
+    return view('history.LoginPage');
+});
 
 /*Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
