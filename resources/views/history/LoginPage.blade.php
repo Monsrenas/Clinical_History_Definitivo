@@ -61,12 +61,13 @@
             <div class="row">
                 <div class="col-md-6 login-form-2">
                     <h3>Clinical History Login</h3>
-                    <form>
+                    <form action="{{url('accestrue')}}" method="post">
+                        @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your User *" value="" />
+                            <input type="text" class="form-control" placeholder="Your User *" value="" name='user'/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                            <input type="password" class="form-control" placeholder="Your Password *" value="" name='password'/>
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btnSubmit" value="Login" />

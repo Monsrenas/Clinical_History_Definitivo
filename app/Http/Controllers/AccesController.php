@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Login;
+use App\Login;
 
 use Illuminate\Http\Request;
 
@@ -15,17 +15,23 @@ class AccesController extends Controller
 
     public function find(Request $request)
     {	/*se esta actualizando*/
-       
+        if(!isset($_SESSION)){
+                                session_start();
+                            }
+                            
         $usr=strval($request->user);
         $psw=strval($request->password);
-        if |($usr=='') { if (!isset($_SESSION['user'])) { $_SESSION['user'] = '';}
-        else { $usr=$_SESSION['user'];}
-        }
-    	$user = Login::where('admin','=', $usr)->first();
-    	if (!is_null($user)) { $user=$user->user;
-                                $_SESSION['identification'] = $identification;
-                                $_SESSION['name']=$patient->name." ".$patient->surname;
-    							return view('history.PATIENTDATA')->with('patient',$patient);
+
+    	$user = Login::where('user','=', $usr)->first();
+    	if (!is_null($user)) {  $_SESSION['user'] = $user->user;
+                                $_SESSION['name' ]= $user->name." ".$user->surname;
+                                return redirect('/');
     			 				}
-    	else { return view('history.PATIENTDATA')->with('identification',$ert); }	
+
+    	else { if (isset($_SESSION['user'])) { 
+                                                unset($_SESSION['user']);
+                                                unset($_SESSION['name']); 
+                                              }	
+             }
+        return redirect('login');       
 	}}

@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Lastmedical extends Eloquent
+class Login extends Eloquent
 {
     protected $connection = 'mongodb';
-    protected $collection = 'acceslevel
+    protected $collection = 'acceslevel';
     
     protected $fillable = [
 							'user', 

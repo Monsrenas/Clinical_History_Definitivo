@@ -31,7 +31,11 @@ $rutas= [				"",
 
 if(!isset($_SESSION)){
     session_start();
-}                                        ?>
+}                   
+
+
+
+?>
 
 </head>
 <body>
@@ -66,6 +70,9 @@ if(!isset($_SESSION)){
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Reports</a></li>
       <li><a href="#">Contact</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{{ url('userlogout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
     <div>
