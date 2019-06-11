@@ -21,8 +21,8 @@ class AccesController extends Controller
                             
         $usr=strval($request->user);
         $psw=strval($request->password);
-
-    	$user = Login::where('user','=', $usr)->first();
+        $matchThese = ['user' => $usr, 'pasword' => $psw];
+    	$user = Login::where($matchThese)->first();
     	if (!is_null($user)) {  $_SESSION['user'] = $user->user;
                                 $_SESSION['name' ]= $user->name." ".$user->surname;
                                 return redirect('/');
@@ -34,4 +34,15 @@ class AccesController extends Controller
                                               }	
              }
         return redirect('login');       
-	}}
+	}
+
+    public function logoff(Request $request) {
+
+        if(!isset($_SESSION)){
+        session_start();
+    } 
+    session_destroy();
+
+    return redirect('/login');
+    }
+}

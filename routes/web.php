@@ -35,9 +35,7 @@ Route::post('Genfind','PatientController@Genfind');
 
 
 Route::post('accestrue','AccesController@find');
-Route::get('userlogout', function () {
-    return view('history.LogOut');
-});
+Route::get('userlogout','AccesController@logoff');
 /*Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
 Route::post('edit/{id}','PatientController@update');
