@@ -25,7 +25,7 @@ class PatientController extends Controller
         return Patient::all();
     }
 
-
+/* $query->where('username', 'like', "%{$request->username}%");busqueda de coincidencias */ 
     public function pfind(Request $request)
     {	/*se esta actualizando*/
        
@@ -38,10 +38,27 @@ class PatientController extends Controller
     	if (!is_null($patient)) { $identification=$patient->identification;
                                 $_SESSION['identification'] = $identification;
                                 $_SESSION['name']=$patient->name." ".$patient->surname;
-    							return view('history.PATIENTDATA')->with('patient',$patient);
+    							return view('history.ShowPatientsData')->with('patient',$patient);
     			 				}
     	else { return view('history.PATIENTDATA')->with('identification',$ert); }	
 	}
+
+    public function multifind(Request $request)
+    {   /*se esta actualizando*/
+
+        $ert=strval($request->findit);
+        if ($request->findit<>''){
+                $patient = Patient::where('identification', 'like', "%{$request->findit}%")->
+                                          orWhere('name', 'like', "%{$request->findit}%")->
+                                          orWhere('surname', 'like', "%{$request->findit}%")->get();
+                                 } else { $patient = Patient::get();}
+
+        if (!is_null($patient)) { 
+                                return view('history.PatientIndex')->with('patient',$patient);
+                                }
+        else { return view('history.ShowPatientsData')->with('identification',$ert); }   
+    }
+    
 
     public function npfind(Request $request)
     {   
@@ -52,7 +69,7 @@ class PatientController extends Controller
                                                         return response()->json(["data"=>$patient]);
                                                         } 
                                     $identification=$patient->identification;
-                                return view('history.PATIENTDATA')->with('patient',$patient);
+                                return view('history.ShowPatientsData')->with('patient',$patient);
                                 }
         else { if ($request->ajax()) {  return response()->json([ "identification"=>$ert ]);  } 
             }   
@@ -79,7 +96,7 @@ class PatientController extends Controller
     		else { if (!$request->identification=null) $patient = Patient::create($request->all()); 
                            $_SESSION['identification'] = $request->identification; 
                            $_SESSION['name']=$patient->name." ".$patient->surname;}	 					
-    	return view('/history.PATIENTDATA')->with('patient',$patient);	
+    	return view('/history.ShowPatientsData')->with('patient',$patient);	
     }
 
     public function update(Request $request, $id)
@@ -158,6 +175,14 @@ class PatientController extends Controller
         $ert=strval($request->identification);         
         return $patient; 
     }
+
+    public function changePatient($identi)
+        {
+
+            $_SESSION['identification']=$identi;
+            view('/history.ShowPatientsData');
+        }
+
 
     public function encuentra(Request $request) 
     {

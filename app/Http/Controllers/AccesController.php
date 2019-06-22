@@ -24,13 +24,13 @@ class AccesController extends Controller
         $matchThese = ['user' => $usr, 'pasword' => $psw];
     	$user = Login::where($matchThese)->first();
     	if (!is_null($user)) {  $_SESSION['user'] = $user->user;
-                                $_SESSION['name' ]= $user->name." ".$user->surname;
+                                $_SESSION['username' ]= $user->name." ".$user->surname;
                                 return redirect('/');
     			 				}
 
     	else { if (isset($_SESSION['user'])) { 
                                                 unset($_SESSION['user']);
-                                                unset($_SESSION['name']); 
+                                                unset($_SESSION['username']); 
                                               }	
              }
         return redirect('login');       

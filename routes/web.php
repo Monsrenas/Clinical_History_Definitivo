@@ -24,18 +24,27 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		Route::get('SustanceUse', 'PatientController@SustanceUsefind');
 		Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
 		Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
+		Route::get('ChangePatient', 'PatientController@changePatient');
     });
 
+Route::get('PatienCng/{iden}', function($iden){
+	if(!isset($_SESSION)){
+    session_start();
+} 
+	$_SESSION['identification']=$iden;
+	return  redirect('/');
+});
 
 Route::post('almacena', 'PatientController@almacena');
 Route::post('pfind','PatientController@pfind');
 Route::post('add','PatientController@store');
 Route::post('Genfind','PatientController@Genfind');
-
+Route::get('multifind','PatientController@multifind');
 
 
 Route::post('accestrue','AccesController@find');
 Route::get('userlogout','AccesController@logoff');
+
 /*Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
 Route::post('edit/{id}','PatientController@update');

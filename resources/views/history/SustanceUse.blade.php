@@ -65,7 +65,7 @@ Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasol
 		@for ($i = 0; $i<7; $i++)
 			  <?php
 			  	$indicen="yesno".$i; 
-				echo $indicen;?>
+				?>
 
 			@if (isset($patient->yesno[$indicen] ))
 			 		

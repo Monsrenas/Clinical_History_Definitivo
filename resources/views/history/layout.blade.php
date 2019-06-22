@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +8,9 @@
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
 
 
     <?php $specialties= ["PATIENT DATA",
@@ -31,61 +36,37 @@ $rutas= [				"",
 
 if(!isset($_SESSION)){
     session_start();
-}                   
-
-
-
+} 
+$name='...';    
 ?>
 
+@if (isset($_SESSION['name']))  
+     <?php $name=$_SESSION['name']; ?> 
+@endif
+
+@include('history.home')
 </head>
+         <div style="background: #4A7FAC; margin: 1px;">
+          <div class="container-fluid">
+            <div class="col-xs-3 col-sm-3 col-md-3">
+             <ul class="nav navbar-nav navbar-left">
+                    <li><a  style="color: white;"><span ></span>PATIENT:  {{$name}} </a></li>
+                </ul>
+            </div>
+            <form class="navbar-form navbar-left" action="{{url('multifind')}}">
+                @csrf
+                 
+              <div class="form-group">
+                <input type="text" name="findit" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default glyphicon glyphicon-search"> Patient</button>
+            </form>
+            <form class="navbar-form navbar-left"><button type="submit" class="btn btn-default glyphicon glyphicon-plus">  New Patient</button></form>
+          </div>
+        </div> 
 <body>
 
-<style type="text/css">
-    nav.navbar {
-    background-color: #265C8A;
-}
-.navbar-inverse .nav li a{
-  color: yellow  !important; 
-}
 
-/*Mouse encima*/
-.navbar-inverse .nav li a:hover{
-  color: red;
-}
-</style>
-
-@if (!isset($_SESSION['identification']))  
-     <?php $_SESSION['identification']=''; ?> 
-@endif 
-@if (!isset($_SESSION['name'])) 
-    <?php  $_SESSION['name']='';  ?> 
-@endif 
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Clinical History</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Reports</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ url('userlogout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-    <div>
-        Patient: {{ $_SESSION['identification'] }}  {{ $_SESSION['name'] }}
-    </div>
-</nav>
-
-
-<div class="container">
-    @yield('content')
- 
-            @show
-</div>
 
 <div class="row" >
 	@csrf 
