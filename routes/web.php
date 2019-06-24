@@ -41,6 +41,8 @@ Route::post('add','PatientController@store');
 Route::post('Genfind','PatientController@Genfind');
 Route::get('multifind','PatientController@multifind');
 
+Route::get('delete','PatientController@destroy');
+
 
 Route::post('accestrue','AccesController@find');
 Route::get('userlogout','AccesController@logoff');

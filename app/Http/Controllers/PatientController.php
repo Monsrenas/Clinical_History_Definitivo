@@ -28,7 +28,12 @@ class PatientController extends Controller
 /* $query->where('username', 'like', "%{$request->username}%");busqueda de coincidencias */ 
     public function pfind(Request $request)
     {	/*se esta actualizando*/
-       
+        $retrnurl='history.ShowPatientsData';
+
+        if (isset($request->edition)) { $_SESSION['identification'] = '';
+                                        $_SESSION['name']='';
+                                        $retrnurl = 'history.PATIENTDATA';}
+
         $ert=strval($request->identification);
 
         if ($ert=='') { if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';}
@@ -38,9 +43,9 @@ class PatientController extends Controller
     	if (!is_null($patient)) { $identification=$patient->identification;
                                 $_SESSION['identification'] = $identification;
                                 $_SESSION['name']=$patient->name." ".$patient->surname;
-    							return view('history.ShowPatientsData')->with('patient',$patient);
+    							return view($retrnurl)->with('patient',$patient);
     			 				}
-    	else { return view('history.PATIENTDATA')->with('identification',$ert); }	
+    	else { return view($retrnurl)->with('identification',$ert); }	
 	}
 
     public function multifind(Request $request)
@@ -105,10 +110,11 @@ class PatientController extends Controller
         $patient->update($request-all());
         return $patient;
 	}
-    public function destroy(Request $request, $id){ 
-    $patient=Patient::findOrFail($id);
+    public function destroy(Request $request){ 
+    $patient=Patient::where('identification','=', $request->identification)->first();
     $patient->delete();
-    return 204;  
+     $patient = Patient::get();
+    return view('history.PatientIndex')->with('patient',$patient);  
 	}
 
     public function LastMedicalHistoryfind(Request $request)
