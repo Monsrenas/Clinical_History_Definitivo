@@ -17,5 +17,8 @@ class Login extends Eloquent
 							'name',
 							'surname',
 							'identification',
+							'email',
+							'phone',
+							'description',
     ];
 }

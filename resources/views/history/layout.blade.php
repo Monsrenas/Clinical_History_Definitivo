@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +29,8 @@ $rutas= [				"",
                                         ];
 if(!isset($_SESSION)){
     session_start();
-} 
+}
+ 
 $name='...';    
 ?>
 
@@ -71,12 +71,12 @@ $name='...';
 <div class="col-xs-3 col-sm-3 col-md-3" >	
 	<?php $i=0; ?>
 	 @foreach($specialties as $image)
-	                
+              
 	                        <?php 
 	                            $filename=str_replace(" ", "", $rutas[$i]);
 	                            $filename="/".$filename;
 	                            $i=$i+1; ?>
-                            @if ((!$_SESSION['identification'] == '') or $i<2) 
+                            @if ((!$_SESSION['identification'] == ''))  
 	                           <a href="{{url($filename)}}" class="btn btn-primary btn-lg btn-block">{{$image}}</a>
 	                        @endif 
 	            @endforeach

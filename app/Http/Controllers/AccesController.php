@@ -36,6 +36,24 @@ class AccesController extends Controller
         return redirect('login');       
 	}
 
+     public function multifind(Request $request)
+    {   /*se esta actualizando*/
+
+        $ert=strval($request->findit);
+        if ($request->findit<>''){
+                $user = Login::where('identification', 'like', "%{$request->findit}%")->
+                                          orWhere('user', 'like', "%{$request->findit}%")->
+                                          orWhere('name', 'like', "%{$request->findit}%")->
+                                          orWhere('surname', 'like', "%{$request->findit}%")->get();
+                                 } else { $user = Login::get();}
+
+        if (!is_null($user)) { 
+                                return view('history.AdminPanel.layout')->with('user',$user);
+                                }
+        else { return view('history.AdminPanel.layout')->with('identification',$ert); }   
+    }
+
+
     public function logoff(Request $request) {
 
         if(!isset($_SESSION)){

@@ -38,6 +38,9 @@ if(!isset($_SESSION)){
 <nav class="navbar navbar-default" style="margin-bottom: 0px;">
   <div class="container-fluid">
     <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+          <img src="<?php echo app_path().'/includes/logo.jpg'; ?>" alt="">
+      </a>
       <a class="navbar-brand" href="#">Clinical History</a>
     </div>
     <ul class="nav navbar-nav">
@@ -53,4 +56,3 @@ if(!isset($_SESSION)){
     </ul>
   </div>
 </nav>
-  

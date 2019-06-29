@@ -10,12 +10,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+if(!isset($_SESSION)){
+    session_start();
+}
+
 Route::get('/login', function () {
     return view('history.LoginPage');
 });
 
 Route::group(['middleware' => 'IsAuten'], function(){
-		Route::get('/', 'PatientController@pfind');
+		/*Route::get('/', 'PatientController@pfind');*/
+
+
+		if ((isset($_SESSION['user'])=='admin')&&($_SESSION['user']=='admin')) {
+		Route::get('/', function () {
+    		return view('history.AdminPanel.layout');
+		});
+		} else {
+
+			Route::get('/', 'PatientController@pfind');			
+		}
+
 		Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
 		Route::get('/CurrentMedication', 'PatientController@CurrentMedicationfind');
 		Route::get('SocialHistory', 'PatientController@SocialHistoryfind');
@@ -35,14 +50,18 @@ Route::get('PatienCng/{iden}', function($iden){
 	return  redirect('/');
 });
 
+/*Patient operations*/
 Route::post('almacena', 'PatientController@almacena');
 Route::post('pfind','PatientController@pfind');
 Route::post('add','PatientController@store');
 Route::post('Genfind','PatientController@Genfind');
 Route::get('multifind','PatientController@multifind');
-
 Route::get('delete','PatientController@destroy');
 
+
+/*User operation*/
+
+Route::post('USERmultifind','AccesController@multifind');
 
 Route::post('accestrue','AccesController@find');
 Route::get('userlogout','AccesController@logoff');
