@@ -36,9 +36,9 @@ class AccesController extends Controller
         return redirect('login');       
 	}
 
-     public function multifind(Request $request)
+     public function xmultifind(Request $request)
     {   /*se esta actualizando*/
-
+        return $request;
         $ert=strval($request->findit);
         if ($request->findit<>''){
                 $user = Login::where('identification', 'like', "%{$request->findit}%")->

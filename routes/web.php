@@ -22,7 +22,7 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		/*Route::get('/', 'PatientController@pfind');*/
 
 
-		if ((isset($_SESSION['user'])=='admin')&&($_SESSION['user']=='admin')) {
+		if ((isset($_SESSION['user']))&&($_SESSION['user']=='admin')) {
 		Route::get('/', function () {
     		return view('history.AdminPanel.layout');
 		});
@@ -61,7 +61,7 @@ Route::get('delete','PatientController@destroy');
 
 /*User operation*/
 
-Route::post('USERmultifind','AccesController@multifind');
+Route::post('USERmultifind','AccesController@xmultifind');
 
 Route::post('accestrue','AccesController@find');
 Route::get('userlogout','AccesController@logoff');
