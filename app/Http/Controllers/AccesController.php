@@ -38,7 +38,6 @@ class AccesController extends Controller
 
      public function xmultifind(Request $request)
     {   /*se esta actualizando*/
-        return $request;
         $ert=strval($request->findit);
         if ($request->findit<>''){
                 $user = Login::where('identification', 'like', "%{$request->findit}%")->
@@ -48,9 +47,9 @@ class AccesController extends Controller
                                  } else { $user = Login::get();}
 
         if (!is_null($user)) { 
-                                return view('history.AdminPanel.layout')->with('user',$user);
+                                return view('history.AdminPanel.Userindex')->with('user',$user);
                                 }
-        else { return view('history.AdminPanel.layout')->with('identification',$ert); }   
+        else { return view('history.AdminPanel.layout')->with('user',$ert); }   
     }
 
 

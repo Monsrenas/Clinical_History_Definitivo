@@ -28,10 +28,8 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		});
 		} else {
 
-			Route::get('/', 'PatientController@pfind');			
-		}
-
-		Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
+			Route::get('/', 'PatientController@pfind');	
+			Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
 		Route::get('/CurrentMedication', 'PatientController@CurrentMedicationfind');
 		Route::get('SocialHistory', 'PatientController@SocialHistoryfind');
 		Route::get('FamilyHistory', 'PatientController@FamilyHistoryfind');
@@ -39,7 +37,10 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		Route::get('SustanceUse', 'PatientController@SustanceUsefind');
 		Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
 		Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
-		Route::get('ChangePatient', 'PatientController@changePatient');
+		Route::get('ChangePatient', 'PatientController@changePatient');		
+		}
+
+		
     });
 
 Route::get('PatienCng/{iden}', function($iden){
@@ -58,13 +59,21 @@ Route::post('Genfind','PatientController@Genfind');
 Route::get('multifind','PatientController@multifind');
 Route::get('delete','PatientController@destroy');
 
-
 /*User operation*/
 
 Route::post('USERmultifind','AccesController@xmultifind');
 
 Route::post('accestrue','AccesController@find');
 Route::get('userlogout','AccesController@logoff');
+
+Route::get('UserCng/{iden}', function($iden){
+	if(!isset($_SESSION)){
+    session_start();
+} 
+	$_SESSION['user']=$iden;
+	return  redirect('/');
+});
+
 
 /*Route::get('patient`','PatientController@index');
 Route::get('edit/{id}','PatientController@edit');
