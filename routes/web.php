@@ -63,8 +63,13 @@ Route::get('delete','PatientController@destroy');
 
 Route::post('USERmultifind','AccesController@xmultifind');
 
-Route::post('accestrue','AccesController@find');
+Route::post('accestrue','AccesController@change_user');
 Route::get('userlogout','AccesController@logoff');
+Route::post('edituser','AccesController@edit_user');
+Route::post('finduser','AccesController@find_user');
+Route::post('saveuser','AccesController@user_store');
+Route::get('deleteuser','AccesController@destroy');
+
 
 Route::get('UserCng/{iden}', function($iden){
 	if(!isset($_SESSION)){
@@ -73,11 +78,5 @@ Route::get('UserCng/{iden}', function($iden){
 	$_SESSION['user']=$iden;
 	return  redirect('/');
 });
-
-
-/*Route::get('patient`','PatientController@index');
-Route::get('edit/{id}','PatientController@edit');
-Route::post('edit/{id}','PatientController@update');
-Route::delete('{id}','PatientController@destroy');*/
 
 

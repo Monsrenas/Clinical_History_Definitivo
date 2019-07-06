@@ -31,7 +31,7 @@ if(!isset($_SESSION)){
               <button type="submit" class="btn btn-default glyphicon glyphicon-search"> User</button>
             </form>
             
-            <form class="navbar-form navbar-left" action="{{url('accestrue')}}" method="post">
+            <form class="navbar-form navbar-left" action="{{url('edituser')}}" method="post">
                 @csrf
                  <input type="text" name="edition"  value="edition" hidden="true">
                 <button type="submit" class="btn btn-default glyphicon glyphicon-plus">  New user</button>
