@@ -76,7 +76,7 @@ $name='...';
 	                            $filename=str_replace(" ", "", $rutas[$i]);
 	                            $filename="/".$filename;
 	                            $i=$i+1; ?>
-                            @if ((!$_SESSION['identification'] == ''))  
+                            @if ((!$_SESSION['identification'] == '')&&($_SESSION['acceslevel']>1)or($i<2))  
 	                           <a href="{{url($filename)}}" class="btn btn-primary btn-lg btn-block">{{$image}}</a>
 	                        @endif 
 	            @endforeach

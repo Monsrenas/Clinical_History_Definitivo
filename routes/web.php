@@ -22,22 +22,23 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		/*Route::get('/', 'PatientController@pfind');*/
 
 
-		if ((isset($_SESSION['user']))&&($_SESSION['user']=='admin')) {
+		if ((isset($_SESSION['user']))&&($_SESSION['acceslevel']>4)) {
 		Route::get('/', function () {
     		return view('history.AdminPanel.layout');
 		});
 		} else {
 
-			Route::get('/', 'PatientController@pfind');	
-			Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
-		Route::get('/CurrentMedication', 'PatientController@CurrentMedicationfind');
-		Route::get('SocialHistory', 'PatientController@SocialHistoryfind');
-		Route::get('FamilyHistory', 'PatientController@FamilyHistoryfind');
-		Route::get('SurgicalHistory', 'PatientController@SurgicalHistoryfind');
-		Route::get('SustanceUse', 'PatientController@SustanceUsefind');
-		Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
-		Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
-		Route::get('ChangePatient', 'PatientController@changePatient');		
+				Route::get('/', 'PatientController@pfind');
+				if ((isset($_SESSION['user']))&&($_SESSION['acceslevel']>1)){ 	
+								Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
+								Route::get('/CurrentMedication', 'PatientController@CurrentMedicationfind');
+								Route::get('SocialHistory', 'PatientController@SocialHistoryfind');
+								Route::get('FamilyHistory', 'PatientController@FamilyHistoryfind');
+								Route::get('SurgicalHistory', 'PatientController@SurgicalHistoryfind');
+								Route::get('SustanceUse', 'PatientController@SustanceUsefind');
+								Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
+								Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
+								Route::get('ChangePatient', 'PatientController@changePatient');}		
 		}
 
 		
@@ -64,12 +65,17 @@ Route::get('delete','PatientController@destroy');
 Route::post('USERmultifind','AccesController@xmultifind');
 
 Route::post('accestrue','AccesController@change_user');
+
+Route::post('changepassword', function () {
+    return view('history.AdminPanel.Changepassword');
+});
+
 Route::get('userlogout','AccesController@logoff');
 Route::post('edituser','AccesController@edit_user');
 Route::post('finduser','AccesController@find_user');
 Route::post('saveuser','AccesController@user_store');
 Route::get('deleteuser','AccesController@destroy');
-
+Route::post('dochangepassword','AccesController@change_password');
 
 Route::get('UserCng/{iden}', function($iden){
 	if(!isset($_SESSION)){
@@ -78,5 +84,3 @@ Route::get('UserCng/{iden}', function($iden){
 	$_SESSION['user']=$iden;
 	return  redirect('/');
 });
-
-

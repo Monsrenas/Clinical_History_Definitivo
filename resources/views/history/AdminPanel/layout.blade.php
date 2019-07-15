@@ -15,11 +15,11 @@ if(!isset($_SESSION)){
  
 @include('history.home')
 </head>
-         <div style="background: #4A7FAC; margin: 1px;">
+         <div style="background: #000000; margin: 1px;">
           <div class="container-fluid">
             <div class="col-xs-3 col-sm-3 col-md-3">
              <ul class="nav navbar-nav navbar-left">
-                    <li><a  style="color: white;"><span ></span>USER:   </a></li>
+                    <li><a  style="color: white;"><span ></span><STRONG>ADMINISTRATION PANEL</STRONG></a></li>
                 </ul>
             </div>
             <form class="navbar-form navbar-left" action="{{url('USERmultifind')}}" method="post">

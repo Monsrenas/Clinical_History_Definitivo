@@ -41,7 +41,8 @@
                               
                                   <div style="float: left; width: 130px;">{{$patmt->identification}}</div> 
                                   <div class="form-inline" style="float: left;">{{$stringpat  }}</div>
-                                  
+  
+                                 @if ($_SESSION['acceslevel']>2)    
                                   <div class="form-inline" style="float: right;">
                                     <form class="form-inline" action="{{url('delete')}}" method="get">
                                       @csrf
@@ -50,7 +51,9 @@
                                       <button type="submit" class="btn btn-default glyphicon glyphicon-trash btn-danger"></button>
                                     </form>
                                   </div>
+                                  @endif 
 
+                                  @if ($_SESSION['acceslevel']>1)
                                   <div class="form-inline" style="float: right; margin-right: 10px;">
                                     <form class="form-inline" action="{{url('pfind')}}" method="post">
                                       @csrf
@@ -59,6 +62,7 @@
                                       <button type="submit" class="btn btn-default glyphicon glyphicon-pencil"></button>
                                     </form>
                                   </div>
+                                  @endif 
                             </a>
                            
               @endforeach

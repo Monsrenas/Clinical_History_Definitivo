@@ -18,19 +18,24 @@ class AccesController extends Controller
         if(!isset($_SESSION)){
                                 session_start();
                             }
-                            
         $usr=strval($request->user);
         $psw=strval($request->password);
-        $matchThese = ['user' => $usr, 'pasword' => $psw];
+        $matchThese = ['user' => $usr, 'password' => $psw];
     	$user = Login::where($matchThese)->first();
-    	if (!is_null($user)) {  $_SESSION['user'] = $user->user;
+        
+    	if (!is_null($user)) {     
+                                $_SESSION['user'] = $user->user;
                                 $_SESSION['username' ]= $user->name." ".$user->surname;
+                                $_SESSION['acceslevel']= (int) $user->acceslevel;
+                                if ($user->password=='12345') {
+                                                                return view('history.AdminPanel.Changepassword')->with('error','You must change the password');}
                                 return redirect('/');
     			 				}
 
     	else { if (isset($_SESSION['user'])) { 
                                                 unset($_SESSION['user']);
-                                                unset($_SESSION['username']); 
+                                                unset($_SESSION['username']);
+                                                unset($_SESSION['acceslevel']); 
                                               }	
              }
         return redirect('login');       
@@ -45,6 +50,24 @@ class AccesController extends Controller
         
         return view('history.AdminPanel.editUser')->with('userdata',$user);       
     }
+
+  public function change_password(Request $request)
+    {   /*se esta actualizando*/
+        if ($request->password<>$request->rnew) {return view('history.AdminPanel.Changepassword')->with('error','New password and repeat password are diferent');}                     
+        $usr=strval($request->user);
+        $matchThese = ['user' => $usr];
+        $user = Login::where($matchThese)->first();
+
+        if (is_null($user)) {return view('history.AdminPanel.Changepassword')->with('error','Wrong username');}
+
+        if ($user->password<>$request->current) {return view('history.AdminPanel.Changepassword')->with('error','User password incorrect');}
+         if (!is_null($user)){  
+                                $user->password=$request->password;
+                                $user->save();
+                                }
+        return redirect('/login');       
+    }
+
 
     public function xmultifind(Request $request)
     {   /*se esta actualizando*/
@@ -76,7 +99,8 @@ class AccesController extends Controller
     public function user_store(Request $request)
     {   
        $ert=strval($request->user);
-        
+       if  (isset($request->rstpass)&&$request->rstpass='on') {$request["password"]='12345';}
+       
        $usr = Login::where('user','=', $ert)->first();
         if (!is_null($usr)){ $usr->update($request->all()); }                
             else { if (!$request->user='') $usr = Login::create($request->all()); }                       

@@ -55,32 +55,56 @@
     font-weight: 600;
     text-decoration: none;
 }
+
 </style>
+
+<?php 
+if (!isset($error)) {$error='';}
+?>
 
 <div class="container login-container">
             <div class="row">
                 <div class="col-md-3">
                 </div>   
                 <div class="col-md-6 login-form-2">
-                    <h3>Clinical History Login</h3>
-                    <form action="{{url('accestrue')}}" method="post">
+                    <h3>Change password</h3>
+                    <h5 style="color: red;">{{$error}}</h5>
+                    <form action="{{url('dochangepassword')}}" method="post">
                         @csrf
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Your User *" value="" name='user'/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" name='password'/>
+                            <input type="password" class="form-control" placeholder="Current password *" value="" name='current' required />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="New password *" value="" name='password' required />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Repeat Password *" value="" name='rnew' required />
                         </div>
                         <div>
-                            <input type="submit" class="btnSubmit" value="Login" />
-                        </div>
-                    </form>
-                    <form action="{{url('changepassword')}}" method="post">
-                        @csrf
-                        <div style="width: 80%; float: center;">
-                            <input type="submit" class="btnSubmit" value="Change Password" />
+                            <input type="submit" class="btnSubmit" value="Save" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
+<script type="text/javascript">
+    
+    var password, password2;
+
+password = document.getElementById('new');
+password2 = document.getElementById('rnew');
+
+password.onchange = password2.onkeyup = passwordMatch;
+
+function passwordMatch() {
+    if(password.value !== password2.value)
+        password2.setCustomValidity('Las contraseñas no coinciden.');
+    else
+        password2.setCustomValidity('');
+}
+
+</script>

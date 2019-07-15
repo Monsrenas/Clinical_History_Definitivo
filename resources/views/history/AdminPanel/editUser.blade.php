@@ -4,10 +4,14 @@
 <?php use App\Login; ?>
 
  @if (isset($userdata))
-           <?php $useredit=$userdata->useredit;  ?>
+           <?php $useredit=$userdata->useredit;  
+                  $password=$userdata->password;
+                  if ($password=='') { $password='12345'; }
+           ?>
  @else         
            <?php                     
             $userdata=new Login; 
+            $password='12345';
            ?>
 @endif
 
@@ -26,6 +30,7 @@
 <form  action="{{url('saveuser')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
   @csrf   
   <input type="hidden" name="user" placeholder="User" value='{{ $userdata->user }}'>
+   <input type="hidden" name="password" placeholder="User" value='{{ $password }}'>
   <strong>Acces level:</strong>
                                 <select name="acceslevel" id="acceslevel" required>
                                     <option value="0">Inactive</option>
@@ -47,13 +52,18 @@
   <label>Description:</label>
 	<textarea  name = "description" required>{{ $userdata->description }}
   </textarea >
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button type="save" class="btn btn-primary">Save</button>
+ 
+	<div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 50px;">
+       	<button type="save" class="btn btn-primary" style="margin-right: 100px;">Save</button>
+        <?php if ($password<>'12345'){ echo "<input type='checkbox' name='rstpass' >   Reset password ";} ?>
     </div>
+
+ 
 </form>
 <script type="text/javascript">
   
         function iniSelect(elm, vlr){  document.getElementById(elm).value=vlr;}
         iniSelect("acceslevel",acceslvl);
+
 </script>
 @endsection

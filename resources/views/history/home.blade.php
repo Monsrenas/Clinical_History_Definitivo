@@ -1,7 +1,3 @@
-
-
-
-
 <style type="text/css">
     nav.navbar {
     background-color: #265C8A;
@@ -44,10 +40,12 @@ if(!isset($_SESSION)){
       <a class="navbar-brand" href="#">Clinical History</a>
     </div>
     <ul class="nav navbar-nav">
+      <!--
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Reports</a></li>
       <li><a href="#">Contact</a></li>
       <li><a></a></li>
+    -->
     </ul>
  
     <ul class="nav navbar-nav navbar-right">
