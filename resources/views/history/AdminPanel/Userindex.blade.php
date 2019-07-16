@@ -17,9 +17,9 @@
           ?>  
 @endif
 
-<div class="row" >
+<div class="row"  >
   @csrf 
-<div class="col-xs-10 col-sm-10 col-md-10 list-group list-group-flush" > 
+<div class="col-xs-10 col-sm-10 col-md-10 list-group list-group-flush" style="width: 100%;" > 
   <div style="margin-bottom: 20px; margin-left: 20px; color: green; font-weight: bold; font-size: large;">
       <div style="float: left; width: 130px;">USER</div> 
       <div class="form-inline" style="float: left;  width: 300px;">USER NAME</div>
@@ -34,13 +34,13 @@
                               $StrURL='UserCng/'.$patmt->identification;
                               $i=$i+1; ?>
                              
-                             <a href='#' class="list-group-item" style="height: 50px;">
+                             <a href='#' class="list-group-item" style="height: 50px; width: 100%;">
                               
-                                  <div style="float: left; width: 130px; font-weight: bold;">{{$patmt->user}}</div> 
-                                  <div class="form-inline" style="float: left;  width: 400px;">{{$stringpat  }}</div>
-                                  <div class="form-inline" style="float: left;">{{$acceslevel[$patmt->acceslevel]  }}</div>
+                                  <div style="float: left; width: 15%; font-weight: bold;">{{$patmt->user}}</div> 
+                                  <div class="form-inline" style="float: left;  width: 35%;">{{$stringpat  }}</div>
+                                  <div class="form-inline" style="float:left; width:30%;">{{$acceslevel[$patmt->acceslevel]  }}</div>
                                   
-                                  <div class="form-inline" style="float: right;">
+                                  <div class="form-inline" style="float: right; width: 5%;">
                                     <form class="form-inline" action="{{url('deleteuser')}}" method="get">
                                       @csrf
                                       <input type="text" name="edition"  value="edition" hidden="true">
@@ -49,7 +49,7 @@
                                     </form>
                                   </div>
 
-                                  <div class="form-inline" style="float: right; margin-right: 10px;">
+                                  <div class="form-inline" style="float: right; margin-right: 10px; width: 5%;">
                                     <form class="form-inline" action="{{url('edituser')}}" method="post">
                                       @csrf
                                       <input type="text" name="edition"  value="edition" hidden="true">
