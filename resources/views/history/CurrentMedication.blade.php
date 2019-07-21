@@ -21,6 +21,14 @@ $identification='';
 
 @endif
 
+<style type="text/css">
+    table { font-size: small;
+             
+            width: 100%;
+          }
+</style>
+
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
 <form  action="{{url('almacena')}}" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -35,6 +43,8 @@ $identification='';
     <br><br>
 	<div class="form-group">
         <strong>Please list any medications that you are now taking. Include non-prescription medications & vitamins or suplements:</strong>
+        <br>
+        <br>
         <br>
         <table >
         	<tr>
@@ -58,8 +68,8 @@ $identification='';
     </div>
     <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Medication</a>
     
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Save</button>
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
+        <button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
         <br>
     </div>
 </form>	
@@ -103,7 +113,11 @@ $identification='';
     		<script> addMedition('{{ $patient->drugname[$i] }}','{{ $patient->dose[$i] }}' ,' {{ $patient->time[$i] }} '); </script>
 		@endfor
     @endif 
+</div>
+<script type="text/javascript">
+    
 
+</script>
 @endsection
 
 <!--

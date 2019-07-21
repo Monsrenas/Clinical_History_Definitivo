@@ -18,6 +18,13 @@
                 $identification=($_SESSION['identification']);  
             ?>
 @endif
+
+<style type="text/css">
+    
+    
+</style>
+
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); font-size: small;">
 <form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
 	@csrf 	
     <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -55,8 +62,10 @@
      </div>
 
 
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button type="submit" class="btn btn-primary">Save</button>
+	<div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 32px">
+       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>
 </form>
+</div>
 @endsection
+

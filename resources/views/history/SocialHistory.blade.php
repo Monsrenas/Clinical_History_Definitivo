@@ -4,21 +4,6 @@
 @section('eltema')
 <?php use App\Socialhistory; ?>
 
-<style type="text/css">
-	table {
-  			border-collapse: collapse;
-  			background: rgba(128, 255, 0, 0.3); 
-  			border: 1px solid rgba(100, 200, 0, 0.3); 
-  			width: 100%;
-		  }
-
-	table, th, td {
-					  border: 1px solid black;
-					  text-align: center;
-					  padding-bottom: 6px;
-				  }
-</style>
-
 @if (isset($_SESSION['identification']))
            <?php 
            		$identification=($_SESSION['identification']);  
@@ -36,6 +21,20 @@
             ?>  
 @endif
 
+<style type="text/css">
+	table {	font-size: small;
+  			 
+  			background: rgba(128, 255, 0, 0.3); 
+  			 
+  			width: 100%;
+		  }
+
+	table, th, td {	  text-align: center;
+					  padding-bottom: 6px;
+				  }
+</style>
+
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
 <form  action="{{url('almacena')}}" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -116,8 +115,8 @@
 	    <input type="text" name="sextrans" value="{{$patient->sextrans}}" class="form-inline" maxlength="70" size="70">
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button type="submit" class="btn btn-primary">Submit</button>
+	<div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
+       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>
 
 </form>
@@ -127,4 +126,5 @@
 
         iniSelect("education",education);
 </script>
+</div>
 @endsection

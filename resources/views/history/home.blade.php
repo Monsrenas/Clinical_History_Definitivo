@@ -35,9 +35,9 @@ if(!isset($_SESSION)){
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-          <img src="<?php echo app_path().'/includes/logo.jpg'; ?>" alt="">
+          <img src="../images/ClinLogo.png" alt="" width="50%" margin="1" style="margin-top: -22px; margin-right: -10px;">
       </a>
-      <a class="navbar-brand" href="#">Clinical History</a>
+      <a class="navbar-brand" href="#"><span style="margin-left: -130px; font-size: xx-large; color: white;">Clinical History</span></a>
     </div>
     <ul class="nav navbar-nav">
       <!--

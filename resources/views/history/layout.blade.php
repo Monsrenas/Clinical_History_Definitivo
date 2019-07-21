@@ -27,6 +27,8 @@ $rutas= [				"",
                         "PhysicalExamination",
                         "PHYSICIANS NOTE"
                                         ];
+
+   $bottonIcon= ["glyphicon-user","glyphicon-folder-open","glyphicon glyphicon-tint","glyphicon-tree-deciduous","glyphicon-grain","glyphicon-scissors","glyphicon-filter","glyphicon-heart","glyphicon-edit"];
 if(!isset($_SESSION)){
     session_start();
 }
@@ -77,7 +79,7 @@ $name='...';
 	                            $filename="/".$filename;
 	                            $i=$i+1; ?>
                             @if ((!$_SESSION['identification'] == '')&&($_SESSION['acceslevel']>2)or($i<2))  
-	                           <a href="{{url($filename)}}" class="btn btn-primary btn-lg btn-block">{{$image}}</a>
+	                           <a href="{{url($filename)}}" id="bott{{ $i }}" class="btn btn-block btn-primary btn-success" style="margin-left: 1px; margin-bottom: -4px;">{{$image}} <span class="glyphicon {{$bottonIcon[$i-1]}} navbar-left"></span></a>
 	                        @endif 
 	            @endforeach
 </div>	

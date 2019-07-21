@@ -29,7 +29,8 @@
 	
 </script>
 
-<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
+<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
 	@csrf 	
 
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -93,8 +94,9 @@ Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasol
 	    <input type="text" name="gmr" value="{{$patient->gmr}}" class="form-inline">
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button type="submit" class="btn btn-primary">Submit</button>
+	<div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
+       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>
 </form>
+</div>
 @endsection

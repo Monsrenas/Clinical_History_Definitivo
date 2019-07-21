@@ -55,7 +55,7 @@
   					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
   					$valor=$patient1->$nomb;
 					$resu="<td colspan='".substr($cadena, 1,1)."'>".substr($cadena, 2)." <input type='text' name='".$nomb."' size='5' value='".$valor."' </td>";}
-  		if ($cadena=="DAF") { $resu="<td rowspan='90'> <textarea style='resize: none;' rows = '100%' cols = '80%' name = 'DAF'>".$patient1->DAF."</textarea> </td>"; }
+  		if ($cadena=="DAF") { $resu="<td rowspan='90'> <textarea style='resize: none;' rows = '133%' cols = '100%' name = 'DAF'>".$patient1->DAF."</textarea> </td>"; }
 
   		if ($cadena=="...") {$i=indice(1);
   			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="N")) {$Nck="checked";} else {$Nck="";} 
@@ -91,28 +91,29 @@
 
 
 <style type="text/css">
-	table {
+	table {	font-size: x-small;
   			border-collapse: collapse;
-  			background: rgba(128, 255, 0, 0.3); 
+  			
   			border: 1px solid rgba(100, 200, 0, 0.3); 
   			width: 100%;
 		  }
 
 	table, th, td {
-					  border: 4px solid white;
+					  border: 2px solid white;
 					  text-align: center;
 					  padding-bottom: 6px;
 				  }
 </style>
 
-<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3);">
+<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
 	@csrf 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 
 	<input type="hidden" name="url"  value='history.PhysicalExamination'>
 	<input type="hidden" name="dtt"  value='6'>
 
-	<table style="margin-bottom: 20px;">
+	<table class="align-middle" style="margin-bottom: 20px;">
 		<tr>
 			<th colspan="2" width="5">INTEGRATED MEDICAL CARE</th>
 			<th colspan="5" width="5">PHYSICAL EXAMINATION</th>
@@ -183,13 +184,10 @@
 	</table>
 
 		
-	<div  style="position: fixed; 
-    height: 30px; 
-    bottom:0; 
-    right:1; 
-    width: 100%;">
-       	<button type="submit" class="btn btn-primary" >Save</button>
+	<div  style="position: fixed; height: 30px; bottom:0; right:1; width: 100%;">
+       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save" > Save</button>
     </div>
 
 </form>
+</div>
 @endsection

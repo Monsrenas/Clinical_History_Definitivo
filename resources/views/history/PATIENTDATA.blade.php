@@ -57,11 +57,8 @@
 }
     if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';} 
                         ?>
-
     <div class="row">
         
-      
-
         <div class="col-xs-12 col-sm-12 col-md-12" id="dpatient">
     
             
@@ -229,7 +226,12 @@
             }
         }
 
+        function Marca(xL) {
+            valor=document.getElementById($xL)
+            alert("Prueba");
+        }
 
+        Marca('bott1');
 
         function iniSelect(elm, vlr){  document.getElementById(elm).value=vlr;}
 

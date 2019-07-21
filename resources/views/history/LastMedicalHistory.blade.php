@@ -16,6 +16,13 @@
            ?>
 
 @endif
+
+<style type="text/css">
+	table {	font-size: small;
+  			 
+  			width: 100%;
+		  }
+</style>
     
 <script type="text/javascript">
 	
@@ -32,7 +39,7 @@
 
 	
 </script>
-
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
 <form  action="{{url('almacena')}}" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -79,8 +86,9 @@
             <strong>Other medical conditions:</strong>
         </div>
         <a href="javascript:addmedicalcondition('')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Other condition</a>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        	<button onclick="pide('LastMedical')" class="btn btn-primary">Save</button>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="text-align:  center; position: fixed; height: 40px; bottom:0;  width: 75%;">
+        	<button onclick="pide('LastMedical')" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     	</div>
 </form>
 
@@ -89,4 +97,5 @@
     			<script> addmedicalcondition('<?php echo  $condition ?>'); </script>
     		@endforeach
     @endif 
+ </div>
 @endsection

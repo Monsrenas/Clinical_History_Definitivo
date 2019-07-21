@@ -2,21 +2,6 @@
 
 @section('eltema')
 <?php use App\Familyhistory; ?>
-<style type="text/css">
-
-	table {
-  			border-collapse: collapse;
-  			background: rgba(128, 255, 0, 0.3); 
-  			border: 1px solid rgba(100, 200, 0, 0.3); 
-  			width: 100%;
-		  }
-
-	table, th, td {
-					  border: 1px solid black;
-					  text-align: center;
-					  padding-bottom: 6px;
-				  }
-</style>
 
 @if (isset($_SESSION['identification']))
            <?php 
@@ -36,9 +21,24 @@
 @endif
 
 <?php 
-	$family=["Father","Mther","Siblings","Children"];
+	$family=["Father","Mother","Siblings","Children"];
  ?>
 
+<style type="text/css">
+	table {	font-size: small;
+  			 
+  			background: rgba(128, 255, 0, 0.3); 
+  			 
+  			width: 100%;
+		  }
+
+	table, th, td {	  text-align: center;
+					  padding-bottom: 6px;
+				  }
+</style>
+
+
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3);  opacity:1;">
 <form  action="{{url('almacena')}}" method="post" id='entrada'>
 @csrf 	
 
@@ -140,10 +140,11 @@
 		<input type="text" name="periods" value="{{$patient->periods}}" class="form-inline" onkeypress="return soloNumeros(event);">
 	</div>	
 </div>
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-       	<button id="save" type="Submit" class="btn btn-primary" disabled>Save</button>
+	<div class="col-xs-3 col-sm-3 col-md-3" style="text-align:  center; position: fixed; height: 40px; bottom:0;  width: 75%;">
+       	<button style="opacity:1;" id="save" type="Submit" class="btn btn-primary glyphicon glyphicon-floppy-save" disabled> Save</button>
     </div>
 </form>
+
 <script type="text/javascript">
 	
 	$("#entrada :input").change(function() {
@@ -151,4 +152,5 @@
    document.getElementById('save').disabled=false;
 });
 </script>
+</div>
 @endsection
