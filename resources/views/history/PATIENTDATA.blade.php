@@ -1,6 +1,9 @@
 
 <?php 
             use App\Patient;
+
+            if(!isset($_SESSION)){ session_start(); }
+            $_SESSION['opcion']='bott1';
             ?>
 @extends('history.layout')
 
@@ -52,11 +55,13 @@
 
     
     <?php 
-    if(!isset($_SESSION)){
-    session_start();
-}
+
+    
+
     if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';} 
-                        ?>
+    ?>                
+
+
     <div class="row">
         
         <div class="col-xs-12 col-sm-12 col-md-12" id="dpatient">

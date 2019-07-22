@@ -2,7 +2,13 @@
 @extends('history.layout')
 
 @section('eltema')
-<?php use App\Socialhistory; ?>
+<?php use App\Socialhistory; 
+
+if(!isset($_SESSION)){
+    session_start();
+}
+$_SESSION['opcion']='bott4';
+?>
 
 @if (isset($_SESSION['identification']))
            <?php 
@@ -33,6 +39,7 @@
 					  padding-bottom: 6px;
 				  }
 </style>
+
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
 <form  action="{{url('almacena')}}" method="post">

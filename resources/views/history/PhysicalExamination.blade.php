@@ -1,7 +1,13 @@
 @extends('history.layout')
 
 @section('eltema')
-<?php use App\Physical; ?>
+<?php use App\Physical; 
+
+	if(!isset($_SESSION)){
+    session_start();
+	}
+	$_SESSION['opcion']='bott8';
+?>
 		
 @if (isset($patient))
            <?php $identification=$patient->identification;  ?>
@@ -184,7 +190,7 @@
 	</table>
 
 		
-	<div  style="position: fixed; height: 30px; bottom:0; right:1; width: 100%;">
+	<div  style="position: fixed; height: 40x; bottom:0; right:1; width: 85%;">
        	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save" > Save</button>
     </div>
 

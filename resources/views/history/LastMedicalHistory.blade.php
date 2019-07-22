@@ -9,6 +9,11 @@
 					"Deep Ven thrombosis","Prostate Problems","Anemia","Jaudice","Hepatitis","Stomach or peptic ulcer","Rheumatic Fever","Tuberculosis","HIV/AIDS"
 					];	
 	
+	if(!isset($_SESSION)){
+    session_start();
+	}
+	$_SESSION['opcion']='bott2';
+
  ?>
 
  @if (isset($patient))

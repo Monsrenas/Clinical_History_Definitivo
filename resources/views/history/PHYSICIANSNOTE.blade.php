@@ -1,7 +1,13 @@
 @extends('history.layout')
 
 @section('eltema')
-<?php use App\Physiciansnote; ?>
+<?php use App\Physiciansnote; 
+
+    if(!isset($_SESSION)){
+    session_start();
+    }
+    $_SESSION['opcion']='bott9';
+?>
         
 @if (isset($patient))
            <?php $identification=$patient->identification;  ?>

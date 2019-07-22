@@ -44,13 +44,13 @@
 
     
     <?php 
-    if(!isset($_SESSION)){
-    session_start();
-}
+    if(!isset($_SESSION)){session_start();}
+    $_SESSION['opcion']='bott1';
+
     if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';} 
                         ?>
 
-    <div class="row" style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); width: 100%; ">
+    <div class="row" style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); width: 100%; margin-left: 2px;">
         
       
 
@@ -168,7 +168,6 @@
         iniSelect("myrelation",srelation);
         iniSelect("marital",marital);
 
-
         if(document.forms[1].length > 0) {
                                         
                                         if(document.forms[1].elements.length > 0) {
@@ -180,6 +179,9 @@
                                                                            
                                                                          };
                                        }
+
+  
+    
 
 </script>
 @endsection

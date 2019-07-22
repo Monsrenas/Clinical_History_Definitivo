@@ -1,7 +1,13 @@
 @extends('history.layout')
 
 @section('eltema')
-<?php use App\Familyhistory; ?>
+<?php use App\Familyhistory; 
+if(!isset($_SESSION)){
+    session_start();
+	}
+	$_SESSION['opcion']='bott5';
+
+?>
 
 @if (isset($_SESSION['identification']))
            <?php 

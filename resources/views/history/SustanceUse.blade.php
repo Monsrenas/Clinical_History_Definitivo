@@ -1,7 +1,14 @@
 @extends('history.layout')
 
 @section('eltema')
-<?php use App\Sustanceuse; ?>
+<?php use App\Sustanceuse; 
+	
+	if(!isset($_SESSION)){
+    session_start();
+	}
+	$_SESSION['opcion']='bott7';
+
+?>
 
 @if (isset($_SESSION['identification']))
            <?php 
