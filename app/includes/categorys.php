@@ -4,49 +4,49 @@ $GENERAL=[				["Mucus Membranes","***","DAF"],
 						["Hair & Nails","***"],
 						["Subcutaneous Tissue","***"],
 						["#1Weight:","#1Height:","#5BMI:"],
-						["<strong>REGIONAL</strong>"]
+						["<strong>REGIONAL</strong>","#3"]
 		];
 
 $REGIONAL=[ ["Axilar Region","***"],
 			["Inguinocrural Region","***"],
-			["<strong>SYSTEMS</strong>"],
-			["<strong>RESPIRATORY SYSTEM</strong>"],
+			["<strong>SYSTEMS</strong>","#3"],
+			["<strong>RESPIRATORY SYSTEM</strong>","#3"],
 			["Inspection","***"],
 			["Palpation","***"],
 			["Percussion","***"],
 			["Auscultation","***"],
 			["#4Respiratory rate:","***"],
-			["<strong>CARDIOVASCULAR SYSTEM</strong>"]
+			["<strong>CARDIOVASCULAR SYSTEM</strong>","#3"]
 		];
 
 $VENOUS=[["Peripheral Venous","***"],
 		 ["Lymphatic","***"]];
 
-$GASTRO=[ ["<strong>GASTROINTESTINAL SYSTEM</strong>"],
+$GASTRO=[ ["<strong>GASTROINTESTINAL SYSTEM</strong>","#3"],
 			["Mouth","***"],
 			["Tongue","***"], 
 			["Oropharynx","***"]
 		];
 
-$HEMO=[	["<strong>HEMOLINFOPOYETIC SYSTEM</strong>"],
+$HEMO=[	["<strong>HEMOLINFOPOYETIC SYSTEM</strong>","#3"],
 		["Lymph nodes","***"],
 		["Spleen","***"],
-		["<strong>URINARY SYSTEM</strong>"],
+		["<strong>URINARY SYSTEM</strong>","#3"],
 		["Inspection","***"],
 		["Palpation","***"],
 		["Percussion","***"],
-		["<strong>GYNECOLOGIC SYSTEM</strong>"],
+		["<strong>GYNECOLOGIC SYSTEM</strong>","#3"],
 		["Vulvar Region","***"],
 		["Speculum","***"],
 		["Vaginal Exam","***"],
-		["<strong>ANDROLOGIC SYSTEM</strong>"],
+		["<strong>ANDROLOGIC SYSTEM</strong>","#3"],
 		["Penis","***"],
 		["Testicles","***"],
-		["<strong>MUSCULOSKELETAL SYSTEM</strong>"],
+		["<strong>MUSCULOSKELETAL SYSTEM</strong>","#3"],
 		["Muscles","***"],
 		["Joints","***"],
 		["Bones","***"],
-		["<strong>NERVOUS SYSTEM</strong>"],
+		["<strong>NERVOUS SYSTEM</strong>","#3"],
 		["Insight/Thought","***"],
 		["Language/Speech","***"],
 		["Memory","***"],

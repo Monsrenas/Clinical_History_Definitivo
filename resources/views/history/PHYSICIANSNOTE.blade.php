@@ -36,7 +36,7 @@
     <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 
     <input type="hidden" name="url"  value='history.PHYSICIANSNOTE'>
-    <input type="hidden" name="dtt"  value='7'>
+    <input type="hidden" name="dtt"  value='PHYSICIANSNOTE'>
 
 
 	<strong>PHYSICIANS NOTE</strong><br>

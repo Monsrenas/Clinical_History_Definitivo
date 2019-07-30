@@ -19,8 +19,15 @@
  @if (isset($patient))
            <?php $identification=$patient->identification;  
            ?>
-
 @endif
+
+
+@if (isset($_SESSION['identification']))
+           <?php 
+           		$identification=($_SESSION['identification']);  
+			?>
+@endif
+
 
 <style type="text/css">
 	table {	font-size: small;
@@ -49,7 +56,7 @@
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.LastMedicalHistory'>
-	<input type="hidden" name="dtt"  value='0'>
+	<input type="hidden" name="dtt"  value='LastMedicalHistory'>
 <table style="width: 100%;">
 	@for ($i = 0; $i < count($preexistentes); $i+=2)
  		<tr>

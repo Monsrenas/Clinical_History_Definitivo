@@ -58,7 +58,7 @@ $name='...';
 </script>
 
 </head>
-         <div style="background: #4A7FAC; margin: 1px; margin-bottom: 2px;">
+         <div style="background: #4A7FAC; margin: 1px; margin-bottom: 2px; ">
           <div class="container-fluid">
             <div class="col-xs-3 col-sm-3 col-md-3">
              <ul class="nav navbar-nav navbar-left">
@@ -80,11 +80,15 @@ $name='...';
                 <button type="submit" class="btn btn-default glyphicon glyphicon-plus">  New Patient</button>
             </form>
 
+            <form class="navbar-form navbar-left" action="{{url('imprimir')}}" method="get">
+                @csrf
+                <button type="submit" class="btn btn-default glyphicon glyphicon-print">  Print History</button>
+            </form>
           </div>
         </div> 
 <body>
 
-<div class="row" style="
+<div class="row" style=" height: auto; max-height: vh;
 
 background: rgba(255,255,255,1);
 background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(134,174,204,1) 100%);

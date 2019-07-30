@@ -39,7 +39,7 @@ if(!isset($_SESSION)){
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.CurrentMedication'>
-	<input type="hidden" name="dtt"  value='1'>
+	<input type="hidden" name="dtt"  value='CurrentMedication'>
 
 	<div class="form-group" id="drugs">
         <strong>Drug allergies:</strong>

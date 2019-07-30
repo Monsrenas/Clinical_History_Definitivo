@@ -50,7 +50,7 @@ if(!isset($_SESSION)){
 
 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 <input type="hidden" name="url"  value='history.FamilyHistory'>
-<input type="hidden" name="dtt"  value='3'>
+<input type="hidden" name="dtt"  value='FamilyHistory'>
 
 <div class="form-group">
 	<table id="medications">

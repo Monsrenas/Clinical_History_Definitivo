@@ -31,7 +31,7 @@ if(!isset($_SESSION)){
 	@csrf 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.SurgicalHistory'>
-	<input type="hidden" name="dtt"  value='4'>
+	<input type="hidden" name="dtt"  value='SurgicalHistory'>
 
 	<textarea rows = "5" cols = "100%" name = "surgical">{{ $patient->surgical }}
     </textarea >

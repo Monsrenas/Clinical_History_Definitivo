@@ -42,7 +42,7 @@
 
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.SustanceUse'>
-	<input type="hidden" name="dtt"  value='5'>
+	<input type="hidden" name="dtt"  value='SustanceUse'>
 
 	<?php 	$category=["Alcohol","Marijuana","Cocaine, crack", "Cigarettes", 'OPIOIDS:  Tylenol #2 & #3, 282’S, 292’S,
 Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasoline, aerosols, paint thinner, poppers, rush, locker room", "OTHER: specify"];

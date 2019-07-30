@@ -21,6 +21,7 @@ Route::get('/login', function () {
 Route::group(['middleware' => 'IsAuten'], function(){
 		/*Route::get('/', 'PatientController@pfind');*/
 
+Route::name('print')->get('/imprimir', 'GeneradorController@imprimir');
 
 		if ((isset($_SESSION['user']))&&($_SESSION['acceslevel']>4)) {
 		Route::get('/', function () {
@@ -30,15 +31,17 @@ Route::group(['middleware' => 'IsAuten'], function(){
 
 				Route::get('/', 'PatientController@pfind');
 				if ((isset($_SESSION['user']))&&($_SESSION['acceslevel']>1)){ 	
-								Route::get('/LastMedicalHistory', 'PatientController@LastMedicalHistoryfind');
-								Route::get('/CurrentMedication', 'PatientController@CurrentMedicationfind');
-								Route::get('SocialHistory', 'PatientController@SocialHistoryfind');
-								Route::get('FamilyHistory', 'PatientController@FamilyHistoryfind');
-								Route::get('SurgicalHistory', 'PatientController@SurgicalHistoryfind');
-								Route::get('SustanceUse', 'PatientController@SustanceUsefind');
-								Route::get('PhysicalExamination', 'PatientController@PhysicalExaminationfind');
-								Route::get('PHYSICIANSNOTE', 'PatientController@PHYSICIANSNOTEfind');
-								Route::get('ChangePatient', 'PatientController@changePatient');}		
+								Route::get('/LastMedicalHistory', 'PatientController@Muestra');
+								Route::get('/CurrentMedication', 'PatientController@Muestra');
+								Route::get('SocialHistory', 'PatientController@Muestra');
+								Route::get('FamilyHistory', 'PatientController@Muestra');
+								Route::get('SurgicalHistory', 'PatientController@Muestra');
+								Route::get('SustanceUse', 'PatientController@Muestra');
+								Route::get('PhysicalExamination', "PatientController@Muestra");
+								Route::get('PHYSICIANSNOTE', 'PatientController@Muestra');
+								Route::get('ChangePatient', 'PatientController@changePatient');
+								Route::get('PrintHistory','PatientController@TeamFind');
+							}		
 		}
 
 		

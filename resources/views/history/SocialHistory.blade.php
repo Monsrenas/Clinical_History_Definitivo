@@ -46,7 +46,7 @@ $_SESSION['opcion']='bott4';
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.SocialHistory'>
-	<input type="hidden" name="dtt"  value='2'>
+	<input type="hidden" name="dtt"  value='SocialHistory'>
 
 	<div class="form-group">
 	    <strong>1- Highest  educational level reached:</strong>
