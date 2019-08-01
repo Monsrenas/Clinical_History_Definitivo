@@ -1,3 +1,10 @@
+<style type="text/css">
+	 hr {	page-break-after: always;
+ 		border: 0;
+		margin: 0;
+		padding: 0;	}
+</style>
+
 <?php 
 	use \App\Http\Controllers\PatientController; 
     use App\Physical; 
@@ -15,5 +22,7 @@
  	@include('history.Print.PRN_LastMedicalHistory')
     @include('history.Print.PRN_CurrentMedication')
  </div>
+
+ <hr>
  @include('history.Print.PRN_PhysicalExamination')
 

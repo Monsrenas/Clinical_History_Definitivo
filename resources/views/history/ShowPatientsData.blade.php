@@ -173,7 +173,7 @@
                                         if(document.forms[1].elements.length > 0) {
                                                                                     document.forms[1].elements[1].focus();
                                                                                   }
-                                        for (i = 1; i < document.forms[2].elements.length; i++) {
+                                        for (i = 2; i < document.forms[2].elements.length; i++) {
                                                                                
                                                                             document.forms[2].elements[i].disabled =true; 
                                                                            

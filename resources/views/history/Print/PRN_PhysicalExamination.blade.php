@@ -33,9 +33,12 @@
 
   		if (substr($cadena, 0,1)=="#") {$i=indice(2); 
   					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
-  					$valor=$patient1->$nomb;
+  					$valor='';
+  					if (isset($patient1->$nomb))	{$valor=$patient1->$nomb;}
 					$resu="<td colspan='".substr($cadena, 1,1)."'>".substr($cadena, 2)." ".$valor." </td>";}
-  		if ($cadena=="DAF") { $resu="<td rowspan='144'>".$patient1->DAF."</td>"; }
+  		if ($cadena=="DAF") { 	$DAF="";
+  								if (isset($patient1->DAF)) { $DAF=$patient1->DAF; } 
+  								$resu="<td rowspan='144'>".$DAF."</td>"; }
 
   		if ($cadena=="...") {$i=indice(1);
   			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="N")) {$Nck="checked";} else {$Nck="";} 

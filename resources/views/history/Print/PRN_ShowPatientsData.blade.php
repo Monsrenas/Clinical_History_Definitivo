@@ -7,6 +7,22 @@
         .form-inline { font-family: arial, helvetica, sans-serif; }
 
         .form-group { font-family: arial, helvetica, sans-serif; }
+
+        .info { text-align: center;
+                font-size: small; }
+        .tlabel {float: none;
+                 font-weight: bold;}
+        .elemen {float: left;} 
+        .lstele {float: none; 
+                 border:px1 solid gray;
+                 height: 35px;
+                 padding: 4px;
+                 margin-bottom: 4px; 
+                }
+        .p40 { width:40%; }    
+        .p30 { width:30%; }
+        .p20 { width:20%; }
+        .p25 { width:25%; } 
     </style>
 
     @if (isset($RESULT[8]))
@@ -29,103 +45,81 @@
     $_SESSION['opcion']='bott1';
 
     if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';} 
-                        ?>
+                 
+     $xMarital=array("S" => "Single", "M"=> "Married","D"=>"Divorced","W"=>"Widowed");
+    ?>
 
-    <div class="row" style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; width: 100%; margin-left: 2px;">
+    <div class="row" style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; width: 100%; height: 240px;">
         
-      
-
-        <div class="col-xs-11 col-sm-11 col-md-11" id="dpatient">
-           <table>
-               <tr>
-                   <td><label>Surname:</label><a><big> {{ $patient->surname }}</big></a></td>
-                   <td><label>Name:</label><a><big> {{ $patient->name }}</big></a></td>
-                   <?php  $itoday=idate('Y',strtotime(date('Y-m-d')));
-                          $iDOB=idate('Y',strtotime($patient->DOB ));  ?>
-                    <td><label>Age:</label><a><big> {{abs($itoday-$iDOB)}}</big></a></td>
-                    <td><label>Sex:</label><a><big> {{$patient->sex}}</big></a></td>
-               </tr>
-               <tr>
-                   <td colspan="2"><label>Address: </label><a><big> {{ $patient->addres }}</big></a></td>
-                   <td><label>Telephone:</label><a><big> {{ $patient->telephone }}</big></a></td>
-                   <td><label>Email:</label><a><big>  {{ $patient->email }}</big></a></td>
-               </tr>
-               <tr>
-                   <td><label>Date of Birth:</label><a><big> {{ $patient->DOB }}</big></a></td>
-               </tr>
-           </table>
-                <label>Identification: </label><a><big>  {{ $identification }}</big> </a>    
-
-                <div class="form-inline">                            
-                            <div class="form-group">
-                                
-                            </div>
+        <div class="col-xs-11 col-sm-11 col-md-11" id="dpatient" style="font-size: x-small;">
+            <div class="lstele">
+                <div class="elemen p30">
+                    <div class="tlabel">Surname:</div> <div class="info">{{ $patient->surname }}</div>
                 </div>
 
-
-                <div class="form-inline">    
-                            <div class="form-group">
-                                <strong> Nationality: </strong>
-                                <?php include(app_path().'/includes/paises.php') ?>
-                                <a>
-                                {{ paises() }}
-                                </a>
-                                <script type="text/javascript"> var nation="<?php  echo  $patient->nationality; ?>"; </script>
-                            </div>
+                <div class="elemen p30">
+                    <div class="tlabel">Name:</div> <div class="info">{{ $patient->name }}</div>
                 </div>
 
-                <div class="form-inline">
-                            <div class="form-group">
-                        
-                            </div>
-
-                            <div class="form-group">
-                                <label>Marital Status:</label>
-                                <a >
-                                <select name="maritalStts"id="marital" required disabled="true">
-                                    <option value="S" >Single</option>
-                                    <option value="M" >Married</option>
-                                    <option value="D" >Divorced</option>
-                                    <option value="W" >Widowed</option>
-                                </select>
-                                </a>
-                                 <script type="text/javascript"> var marital="<?php  echo  $patient->maritalStts; ?>"; </script>    
-                            </div>
+                <?php  $itoday=idate('Y',strtotime(date('Y-m-d')));
+                $iDOB=idate('Y',strtotime($patient->DOB ));  ?>
+                <div class="elemen p20">
+                    <div class="tlabel">Age:</div><div class="info">{{abs($itoday-$iDOB)}}</div>
                 </div>
-                <br><br>
-                <div class="form-inline" >
 
-                            <div class="form-group">
-                                <label>Next of kin:</label><a><big> {{ $patient->nxOfKin }}</big></a>
-                            </div>
-                            <div class="form-group">
-                                <a>
-                                <strong>Relationship:</strong>
-                                <select name="relation" id="myrelation" required disabled="true">
-                                    <option value="SP" >Spouse</option>
-                                    <option value="PR" >Parents</option>
-                                    <option value="SB" >Siblings</option>
-                                    <option value="CH" >Children</option>
-                                    <option value="GC" >Grandchildren</option>
-                                    <option value="GP" >Grandparents</option>
-                                    <option value="NN" >Nieces/Nephews</option>
-                                    <option value="AU" >Aunts/Uncles</option>
-                                    <option value="TC" >Great Grandchildren</option>
-                                    <option value="TP" >Great Grandparents</option>
-                                    <option value="GN" >Great Nieces/Nephews</option>
-                                    <option value="CS" >Cousins</option>
-                                    <option value="NG" >Neighbor</option>
-                                </select>
-                                </a>
-                                <script type="text/javascript"> var srelation="<?php  echo  $patient->relation; ?>"; </script>
-                            </div>
-                </div>
-                <div class="form-inline">
-                            <div class="form-group">
-                                <label>Contact information:</label><a><big> {{ $patient->contact }}</big></a>
-                            </div>
+                <div class="elemen p20">
+                    <div class="tlabel">Sex:</div> <div class="info">{{$patient->sex}}</div>
                 </div>
             </div>
+
+            <div class="lstele">
+                <div class="elemen p40">
+                    <div class="tlabel">Address:</div><div class="info">{{ $patient->addres }}</div>
+                </div>
+                <div class="elemen p30">
+                    <div class="tlabel">Telephone:</div> <div class="info">{{ $patient->telephone }}</div>
+                </div>
+                <div class="elemen p30">
+                    <div class="tlabel">Email:</div><div class="info">{{ $patient->email }}</div>
+                </div>
+            </div>
+          
+            <div class="lstele">
+                 <?php include(app_path().'/includes/paises.php') ?>  
+                 <div class="elemen p40">    
+                    <div class="tlabel">Nationality:</div><div class="info">{{ paises() }}</div>
+                 </div>
+                 
+                 <script type="text/javascript"> var nation="<?php  echo  $patient->nationality; ?>"; </script>
+                 <div class="elemen p30">
+                    <div class="tlabel">Date of Birth:</div><div class="info"> {{ $patient->DOB }}</div>
+                 </div>
+
+                 <div class="elemen p30">
+                    <div class="tlabel">Marital Status:</div><div class="info"> <?php echo $xMarital[$patient->maritalStts]; ?> </div>               
+                 </div>             
+            </div> 
+
+            <div class="lstele">
+                <div class="elemen p40">    
+                    <div class="tlabel">Next of kin:</div><div class="info"> {{ $patient->nxOfKin }}</div>
+                </div>
+
+                <?php $xRelation=array("SP"=>"Spouse","PR"=>"Parents","SB"=>"Siblings","CH"=>"Children","GC"=>"Grandchildren","GP"=>"Grandparents","NN"=>"Nieces/Nephews","AU" =>"Aunts/Uncles","TC"=>"Great Grandchildren","TP"=>"Great Grandparents","GN"=>"Great Nieces/Nephews","CS"=>"Cousins","NG"=>"Neighbor")
+                                 ?>
+                <div class="elemen p20">    
+                    <div class="tlabel">Relationship:</div><div class="info"><?php echo $xRelation[$patient->relation]; ?> </div>
+                </div>
+
+                <div class="elemen p40">    
+                    <div class="tlabel">Contact information:</div><div class="info">{{ $patient->contact }}</div>
+                </div>
+
+            </div> 
+            <div class="elemen p30" style="height: 40px;">     
+                <div class="tlabel" style="float: left; margin: 4px;">Identification: </div><div class="info" style="margin-left: 20px;">{{ $identification }}</div>
+            </div>      
+        </div>
  
         
     </div> <!-- Fin del <div class="row ">  -->
