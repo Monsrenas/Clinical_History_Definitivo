@@ -53,11 +53,11 @@
         
         <div class="col-xs-11 col-sm-11 col-md-11" id="dpatient" style="font-size: x-small;">
             <div class="lstele">
-                <div class="elemen p30">
+                <div class="elemen p40">
                     <div class="tlabel">Surname:</div> <div class="info">{{ $patient->surname }}</div>
                 </div>
 
-                <div class="elemen p30">
+                <div class="elemen p20">
                     <div class="tlabel">Name:</div> <div class="info">{{ $patient->name }}</div>
                 </div>
 

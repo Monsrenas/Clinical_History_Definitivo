@@ -13,6 +13,7 @@ class Physical extends Eloquent
     protected $fillable = [	'identification', 
 							'N',
 							'DAF',
+							'DAD',
 							'Weight',
 							'Height',
 							'BMI',

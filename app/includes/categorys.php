@@ -22,8 +22,8 @@ $REGIONAL=[ ["Axilar Region","***"],
 $VENOUS=[["Peripheral Venous","***"],
 		 ["Lymphatic","***"]];
 
-$GASTRO=[ ["<strong>GASTROINTESTINAL SYSTEM</strong>","#3"],
-			["Mouth","***"],
+$GASTRO=[ ["<strong>GASTROINTESTINAL SYSTEM</strong>","NNN","<strong>DESCRIBE ABNORMAL FINDINGS</strong>"],
+			["Mouth","***","DAD"],
 			["Tongue","***"], 
 			["Oropharynx","***"]
 		];
