@@ -6,7 +6,7 @@
 	if(!isset($_SESSION)){
     session_start();
 	}
-	$_SESSION['opcion']='bott8';
+	$_SESSION['opcion']='bott9';
 ?>
 
 
@@ -180,6 +180,7 @@
 
 
 <style type="text/css">
+
 	table {	font-size: x-small;
   			border-collapse: collapse;
   			

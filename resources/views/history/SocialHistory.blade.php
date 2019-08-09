@@ -7,7 +7,7 @@
 if(!isset($_SESSION)){
     session_start();
 }
-$_SESSION['opcion']='bott4';
+$_SESSION['opcion']='bott5';
 ?>
 
 @if (isset($_SESSION['identification']))

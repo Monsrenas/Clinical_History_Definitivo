@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Patient;
+use App\Interrogation;
 use App\Lastmedical;
 use App\Currentmedication;
 use App\Socialhistory;
@@ -29,7 +30,7 @@ class PatientController extends Controller
     public function pfind(Request $request)
     {	/*se esta actualizando*/
         $retrnurl='history.ShowPatientsData';
-
+        
         if (isset($request->edition)) { $_SESSION['identification'] = '';
                                         $_SESSION['name']='';
                                         $retrnurl = 'history.PATIENTDATA';}
@@ -104,6 +105,9 @@ class PatientController extends Controller
     public function modelo($ind)
     {
         switch ($ind) {
+     case 'Interrogation':
+         return $tmodelo= new Interrogation;
+        break;
     case 'LastMedicalHistory':
         return $tmodelo= new Lastmedical;
         break;
@@ -186,7 +190,8 @@ class PatientController extends Controller
     static function TeamFind() 
     {       
         
-        $rutas= [       "LastMedicalHistory",
+        $rutas= [       "Interrogation",
+                        "LastMedicalHistory",
                         "CurrentMedication",
                         "SocialHistory", 
                         "FamilyHistory",
@@ -203,6 +208,7 @@ class PatientController extends Controller
            $uri = $value;
 
             switch ($value) {
+                case "Interrogation": $tmodelo= new Interrogation;         break;
                 case 'LastMedicalHistory': $tmodelo= new Lastmedical;      break;
                 case 'CurrentMedication': $tmodelo= new Currentmedication; break;
                 case 'SocialHistory': $tmodelo= new Socialhistory;         break;

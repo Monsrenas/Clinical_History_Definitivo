@@ -8,7 +8,8 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <?php $specialties= ["PATIENT DATA",
-    					"Last Medical History",
+                         "Interrogation",
+    					          "Last Medical History",
                         "Current Medication",
                         "Social History", 
                         "Family History",
@@ -18,6 +19,7 @@
                         "PHYSICIANS NOTE"
                                         ]; 
 $rutas= [				"",
+              "Interrogation",
     					"Last Medical History",
                         "Current Medication",
                         "Social History", 
@@ -28,7 +30,7 @@ $rutas= [				"",
                         "PHYSICIANS NOTE"
                                         ];
 
-   $bottonIcon= ["glyphicon-user","glyphicon-folder-open","glyphicon glyphicon-tint","glyphicon-tree-deciduous","glyphicon-grain","glyphicon-scissors","glyphicon-filter","glyphicon-heart","glyphicon-edit"];
+   $bottonIcon= ["glyphicon-user","","glyphicon-folder-open","glyphicon glyphicon-tint","glyphicon-tree-deciduous","glyphicon-grain","glyphicon-scissors","glyphicon-filter","glyphicon-heart","glyphicon-edit"];
 if(!isset($_SESSION)){
     session_start();
     if(!isset($_SESSION['opcion'])){$_SESSION['opcion']=""; }

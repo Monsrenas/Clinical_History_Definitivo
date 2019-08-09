@@ -14,6 +14,7 @@ class Login extends Eloquent
 							'user', 
 							'password',
 							'acceslevel',
+							'speciality',
 							'name',
 							'surname',
 							'identification',

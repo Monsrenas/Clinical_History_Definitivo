@@ -5,7 +5,7 @@
 if(!isset($_SESSION)){
     session_start();
 	}
-	$_SESSION['opcion']='bott5';
+	$_SESSION['opcion']='bott6';
 
 ?>
 

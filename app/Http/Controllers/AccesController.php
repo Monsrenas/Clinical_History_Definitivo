@@ -27,6 +27,7 @@ class AccesController extends Controller
                                 $_SESSION['user'] = $user->user;
                                 $_SESSION['username' ]= $user->name." ".$user->surname;
                                 $_SESSION['acceslevel']= (int) $user->acceslevel;
+                                $_SESSION['speciality']= ((isset($user->speciality)) ? $user->speciality:"");
                                 if ($user->password=='12345') {
                                                                 return view('history.AdminPanel.Changepassword')->with('error','You must change the password');}
                                 return redirect('/');
@@ -35,7 +36,8 @@ class AccesController extends Controller
     	else { if (isset($_SESSION['user'])) { 
                                                 unset($_SESSION['user']);
                                                 unset($_SESSION['username']);
-                                                unset($_SESSION['acceslevel']); 
+                                                unset($_SESSION['acceslevel']);
+                                                unset($_SESSION['speciality']); 
                                               }	
              }
         return redirect('login');       

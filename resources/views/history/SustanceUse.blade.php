@@ -6,7 +6,7 @@
 	if(!isset($_SESSION)){
     session_start();
 	}
-	$_SESSION['opcion']='bott7';
+	$_SESSION['opcion']='bott8';
 
 ?>
 
@@ -36,7 +36,7 @@
 	
 </script>
 
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); font-size: x-small;">
 <form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
 	@csrf 	
 
@@ -50,17 +50,17 @@ Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasol
 
 	<table style="margin-bottom: 20px;">
 		<tr>
-			<td>DRUG CATEGORY (circle each substance used)</td>
-			<td>Age when you first used this:</td>
-			<td>How much & how often did you use this?</td>
-			<td>How many years did you use this?</td>
-			<td>When did you last use this?</td>
-			<td> Do you currently use this?</td>
+			<td><strong>DRUG CATEGORY (circle each substance used)</strong></td>
+			<td><strong>Age when you first used this:</strong></td>
+			<td><strong>How much & how often did you use this?</strong></td>
+			<td><strong>How many years did you use this?</strong></td>
+			<td><strong>When did you last use this?</strong></td>
+			<td><strong>Do you currently use this?</strong></td>
 		</tr>
 
 		@for ($i = 0; $i<7; $i++)
 		 <tr>
-		 	<td>{{ $category[$i] }}</td>
+		 	<td style="text-align: right; padding-right:15px;">{{ $category[$i] }}</td>
 		 	<td><input type='text' class='form-control' name='ageuse[]' value='{{$patient->ageuse[$i]}}' onkeypress="return soloNumeros(event);"></td>
 		 	<td><input type='text' class='form-control' name='often[]' value='{{$patient->often[$i]}}' onkeypress="return soloNumeros(event);"></td>
 		 	<td><input type='text' class='form-control' name='yearsuse[]' value='{{$patient->yearsuse[$i]}}' onkeypress="return soloNumeros(event);"></td>
@@ -82,17 +82,6 @@ Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasol
 	             @endif
         @endfor
 	</table>
-
-	<div class="form-group">
-	    <strong>CC:</strong>
-	    <input type="text" name="cc" value="{{$patient->cc}}" class="form-inline" maxlength="100" size="100">
-	</div>
-	<div class="form-group">
-		<strong>HPI:</strong>
-		<textarea rows = "5" cols = "100%" name = "hpi">
-	           {{$patient->hpi}} 
-	    </textarea>
-	    </div>
 
 	<div class="form-group">
 	    <strong>URINE DIPSTICK:</strong>

@@ -8,7 +8,7 @@ $identification='';
 if(!isset($_SESSION)){
     session_start();
     }
-    $_SESSION['opcion']='bott3';
+    $_SESSION['opcion']='bott4';
 
  ?>
 
@@ -83,7 +83,7 @@ if(!isset($_SESSION)){
 <script type="text/javascript">
 		
 		var $med=0;
-
+        var $dru=0;
         function delelm($xeme){ 
        
         $('#'+$xeme).remove();
@@ -100,10 +100,11 @@ if(!isset($_SESSION)){
        }
 
 	function addDrug($vAlerg){ 
-		$others="<div id='drug"+$med+"'><input type='text' class='form-inline' name='allergieTo[]' placeholder='Drug to which the patient is allergic' value='"+$vAlerg+"' maxlength='100' size='100'> <a href='javascript:delelm(\"drug"+$med+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> </a> </div>";
+		$others="<div id='drug"+$dru+"'><input type='text' class='form-inline' name='allergieTo[]' placeholder='Drug to which the patient is allergic' value='"+$vAlerg+"' maxlength='100' size='100'> <a href='javascript:delelm(\"drug"+$dru+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> </a> </div>";
 		
 		var txt = document.getElementById('drugs');
         txt.insertAdjacentHTML('beforeend', $others);
+        $dru=$dru+1;
        }
 </script>
 
