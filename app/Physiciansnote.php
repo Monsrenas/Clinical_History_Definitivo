@@ -12,6 +12,8 @@ class Physiciansnote extends Eloquent
     
     protected $fillable = [	'identification', 
 							'note',
+							  'ndate',
+							  'user',
 							'diagnosis',
 							'plan',
 							'followup',

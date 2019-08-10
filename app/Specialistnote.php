@@ -14,6 +14,6 @@ class Specialistnote extends Eloquent
 							'identification', 
 							'user',
 							'specialty',
-							'text',
+							'note',
     ];
 }

@@ -30,7 +30,7 @@ class PatientController extends Controller
     public function pfind(Request $request)
     {	/*se esta actualizando*/
         $retrnurl='history.ShowPatientsData';
-        
+
         if (isset($request->edition)) { $_SESSION['identification'] = '';
                                         $_SESSION['name']='';
                                         $retrnurl = 'history.PATIENTDATA';}
@@ -181,7 +181,8 @@ class PatientController extends Controller
     }
 
     public function Muestra(Request $request)
-    {   $uri = $request->path();
+    {  
+        $uri = $request->path();
         $classdata=$this->modelo($uri);   
         $result=$this->Genfind($classdata, $classdata);
         return view('history.'.$uri)->with('patient',$result); 
@@ -190,42 +191,42 @@ class PatientController extends Controller
     static function TeamFind() 
     {       
         
-        $rutas= [       "Interrogation",
-                        "LastMedicalHistory",
-                        "CurrentMedication",
-                        "SocialHistory", 
-                        "FamilyHistory",
-                        "SurgicalHistory",
-                        "SustanceUse",
-                        "PhysicalExamination",
-                        "PHYSICIANSNOTE",
-                        "Patient"
-                                        ];
+                $rutas= [       "Interrogation",
+                                "LastMedicalHistory",
+                                "CurrentMedication",
+                                "SocialHistory", 
+                                "FamilyHistory",
+                                "SurgicalHistory",
+                                "SustanceUse",
+                                "PhysicalExamination",
+                                "PHYSICIANSNOTE",
+                                "Patient"
+                                                ];
 
-        if (isset($_SESSION['identification'])) { $who=$_SESSION['identification'];} else {$who='';}
+                if (isset($_SESSION['identification'])) { $who=$_SESSION['identification'];} else {$who='';}
 
-        foreach ($rutas as $key => $value) {
-           $uri = $value;
+                foreach ($rutas as $key => $value) {
+                   $uri = $value;
 
-            switch ($value) {
-                case "Interrogation": $tmodelo= new Interrogation;         break;
-                case 'LastMedicalHistory': $tmodelo= new Lastmedical;      break;
-                case 'CurrentMedication': $tmodelo= new Currentmedication; break;
-                case 'SocialHistory': $tmodelo= new Socialhistory;         break;
-                case 'FamilyHistory': $tmodelo= new Familyhistory;         break;
-                case 'SurgicalHistory': $tmodelo= new Surgicalhistory;     break;
-                case 'SustanceUse': $tmodelo= new SustanceUse;             break;
-                case 'PhysicalExamination': $tmodelo= new Physical;        break;
-                case 'PHYSICIANSNOTE': $tmodelo= new Physiciansnote;       break;
-                case 'Patient':        $tmodelo= new Patient;       break; }   
+                    switch ($value) {
+                        case "Interrogation": $tmodelo= new Interrogation;         break;
+                        case 'LastMedicalHistory': $tmodelo= new Lastmedical;      break;
+                        case 'CurrentMedication': $tmodelo= new Currentmedication; break;
+                        case 'SocialHistory': $tmodelo= new Socialhistory;         break;
+                        case 'FamilyHistory': $tmodelo= new Familyhistory;         break;
+                        case 'SurgicalHistory': $tmodelo= new Surgicalhistory;     break;
+                        case 'SustanceUse': $tmodelo= new SustanceUse;             break;
+                        case 'PhysicalExamination': $tmodelo= new Physical;        break;
+                        case 'PHYSICIANSNOTE': $tmodelo= new Physiciansnote;       break;
+                        case 'Patient':        $tmodelo= new Patient;       break; }   
 
-            $classdata=$tmodelo;
-          
-            $result[$key] = $classdata::where('identification','=', $who)->first();  
+                    $classdata=$tmodelo;
+                  
+                    $result[$key] = $classdata::where('identification','=', $who)->first();  
 
-        }
-    
-     return view('history.PrintHistory')->with('RESULT',$result);   
+                }
+            
+             return view('history.PrintHistory')->with('RESULT',$result);   
 
     }
 

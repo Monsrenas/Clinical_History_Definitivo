@@ -46,75 +46,28 @@
 	@csrf 	
 
 <div id='notelayout'>
-<strong>PHYSICIANS NOTES</strong>
-<br><br>
-<ul id="menu">
-   <li><input type="checkbox" name="list" id="nive"><label for="nive">Nivel 1</label>
-   <ul class="interior">
-           
-         <li><input type="checkbox" name="list" id="nivel2-1"><label for="nivel2-1">Nivel 2</label>
-
-           <ul class="interior">
-                <li>
-                    <div>
-                        <textarea style="resize: none;" rows = "5" cols = "100%" name = "note" >{{ $patient->note }}</textarea>
-                    </div>  
-                </li> 
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-            </ul>
-            <div>
-                Adeciona especialista
-            </div>
-         </li>
-         <li><input type="checkbox" name="list" id="nivel2-2"><label for="nivel2-2">Nivel 2</label>
-           <ul class="interior"> 
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-            </ul>
-         </li>
-         <li><a href="#r">Nivel 2</a></li>
-      </ul>
-   </li>
-   <li><input type="checkbox" name="list" id="nivel1-2" ><label for="nivel1-2">Nivel 1</label>
-      <ul class="interior">
-         <li><a href="#r">Nivel 2</a></li>
-         <li><input type="checkbox" name="list" id="nivel2-3"><label for="nivel2-3">Nivel 2</label>
-           <ul class="interior">
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-            </ul>
-         </li>
-         <li><input type="checkbox" name="list" id="nivel2-4"><label for="nivel2-4">Nivel 2</label>
-         <ul class="interior">
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-             <li><a href="#r">Nivel 3</a></li>
-            </ul>
-         </li>
-      </ul>
-   </li>
-   <li><a href="#r">Nivel 1</a></li>
-</ul>
-
-
+    <strong>PHYSICIANS NOTES</strong>
+    <br><br>
+    
+    <ul id="menu">
+       
+    </ul>
 </div>
-<a href="javascript:addSpeciality('')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add specialty</a>
+
+<a href="javascript:addSpeciality('a')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add specialty</a>
 
 
 
 
-<br>  <br><br>  <br>
+<br>  <br>
     <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 
     <input type="hidden" name="url"  value='history.PHYSICIANSNOTE'>
     <input type="hidden" name="dtt"  value='PHYSICIANSNOTE'>
 
-
+    <!--
 	<strong>PHYSICIANS NOTE</strong><br>
-	<textarea style="resize: none;" rows = "5" cols = "100%" name = "note" >{{ $patient->note }}</textarea>
+	<textarea style="resize: none;" rows = "5" cols = "100%" name = "note" >{{ $patient->note }}</textarea> -->
 
 	<br><strong>DIAGNOSIS:</strong><br>
     <textarea style="resize: none;" rows = "5" cols = "100%" name = "diagnosis">{{ $patient->diagnosis }}</textarea>
@@ -146,21 +99,84 @@
        	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>
 </form>
+
 </div>
 
 <script type="text/javascript">
-    var $NumSpecialty=0;
-    var $Dbtn="<a href='javascript:addDoctor()'  class='btn btn-success'><span class='glyphicon glyphicon glyphicon-plus' aria-hidden='true'></span> Add doctor</a>";
+   var $NumSpecialty=0;
+   var   $NumDoc=0;
+   
+
+    function addSelect (){
+
+        var speciality=[ 'Allergology',
+                'Anaesthetics',
+                'Cardiology',
+                'Clinical biology',
+                'Clinical chemistry',
+                'Dermatology',
+                'Endocrinology',
+                'Gastroenterology',
+                'Geriatrics',
+                'Hematology',
+                'Immunology',
+                'Infectious diseases',
+                'Internal medicine',
+                'Laboratory medicine',
+                'Microbiology',
+                'Nephrology',
+                'Neuropsychiatry',
+                'Neurology',
+                'Neurosurgery',
+                'Obstetrics and gynaecology',
+                'Ophthalmology',
+                'Orthopaedics',
+                'Otorhinolaryngology',
+                'Paediatrics',
+                'Pathology',
+                'Pharmacology',
+                'Physical medicine and rehabilitation',
+                'Psychiatry',
+                'Radiology',
+                'Respiratory medicine',
+                'Rheumatology',
+                'Stomatology',
+                'Urology',
+                'Venereology'];
+
+    var i;
+    for (i = 0; i < speciality.length; i++) {
+                                            
+                                            $spSelect+="<option value='"+$i+"'>"+speciality[$i]+"</option> ";
+                                        } 
+
+    }   
+
+    function addDoctor($specia){ 
+        var $MYtextarea="";
+
+        var $others="<li> <input type='checkbox' name='list' id='doctor"+$NumDoc+"'> <label for='doctor"+$NumDoc+"'>Dr William Ferrer </label> <ul class='interior'> <div><textarea style= 'resize: none;' rows='5' cols='100%' name='note[]'>  </textarea>  </div> </ul></li>";
+        
+        var txt = document.getElementById($specia);
+        txt.insertAdjacentHTML('beforeend', $others);
+        $NumDoc=$NumDoc+1;
+       }
+
 
 
     function addSpeciality($valor){ 
-        $others="<li><input type='checkbox' name='list' id='specialty"+$NumSpecialty+"'><label for='specialty"+$NumSpecialty+"'> Speciality "+$NumSpecialty+"</label> <ul class='interior'>  <div style='border: 1px solid blue;'>Prueba "+$Dbtn+"</div></ul></li>";
+
+        $Dbtn="<a href=\"javascript:addDoctor('space"+$NumSpecialty+"' )\"  class='btn btn-success' style='font-size:xx-small; align: right'><span class='glyphicon glyphicon-plus'></span> Add doctor</a>";
+
+        $others="<li><input type='checkbox' name='list' id='specialty"+$NumSpecialty+"'> <label for='specialty"+$NumSpecialty+"'> Speciality "+$NumSpecialty+"</label> <ul class='interior'> <div id='space"+$NumSpecialty+"''></div>  <div>"+$Dbtn+"</div></ul></li>";
         
         var txt = document.getElementById('menu');
         txt.insertAdjacentHTML('beforeend', $others);
         $NumSpecialty=$NumSpecialty+1;
-       }
+       }   
+
 
 </script>
+
 @endsection
 
