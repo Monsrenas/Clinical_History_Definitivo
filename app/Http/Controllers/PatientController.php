@@ -12,6 +12,7 @@ use App\Surgicalhistory;
 use App\Sustanceuse;
 use App\Physical;
 use App\Physiciansnote;
+use App\Login;
 
 
 if(!isset($_SESSION)){
@@ -183,10 +184,41 @@ class PatientController extends Controller
     public function Muestra(Request $request)
     {  
         $uri = $request->path();
-        $classdata=$this->modelo($uri);   
+
+        $classdata=$this->modelo($uri);  
+
         $result=$this->Genfind($classdata, $classdata);
+
         return view('history.'.$uri)->with('patient',$result); 
     }
+
+    public function ShowSpecialistNote(Request $request)
+        {
+            $classdata = new Physiciansnote;
+            $result=$this->Genfind($classdata, $classdata);
+            $NoteList= []; 
+            $i=0;
+            if (isset($result->note))
+                {  if (is_array($result->note)) {
+                                                  foreach ($result->note as $value) {
+                                                    $Doctor=''; $DrSpeciality='';
+                                                   if (isset($result->user[$i])) {
+                                                     $drname=Login::where('user','=', $result->user[$i])->first();
+                                                     $Doctor=$drname->name." ".$drname->surname;
+                                                   }
+
+                                                   if (isset($result->speciality[$i]))
+                                                      { $DrSpeciality=$result->speciality[$i];}
+
+                                                   
+                                                   $NoteList[]= [$value,$result->user[$i],$Doctor, $DrSpeciality ];
+                                                   $i=$i+1; 
+                                                }
+                                              } 
+                } 
+                
+            return view('history.PHYSICIANSNOTE')->with('patient',$result)->with('NoteList', $NoteList);     
+        }
 
     static function TeamFind() 
     {       

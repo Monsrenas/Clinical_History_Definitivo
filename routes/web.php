@@ -39,7 +39,7 @@ Route::group(['middleware' => 'IsAuten'], function(){
 								Route::get('SurgicalHistory', 'PatientController@Muestra');
 								Route::get('SustanceUse', 'PatientController@Muestra');
 								Route::get('PhysicalExamination', "PatientController@Muestra");
-								Route::get('PHYSICIANSNOTE', 'PatientController@Muestra');
+								Route::get('PHYSICIANSNOTE', 'PatientController@ShowSpecialistNote');
 								Route::get('ChangePatient', 'PatientController@changePatient');
 								Route::get('PrintHistory','PatientController@TeamFind');
 							}		

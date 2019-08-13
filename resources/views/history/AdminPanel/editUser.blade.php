@@ -1,6 +1,8 @@
 @extends('history.AdminPanel.layout')
 
 @section('eltema')
+
+
 <?php use App\Login; ?>
 
  @if (isset($userdata))
@@ -15,63 +17,10 @@
             $password='12345';
            ?>
 @endif
-<?php  
-  $speciality=[ 'Allergology',
-                'Anaesthetics',
-                'Cardiology',
-                'Clinical biology',
-                'Clinical chemistry',
-                'Dermatology',
-                'Endocrinology',
-                'Gastroenterology',
-                'Geriatrics',
-                'Hematology',
-                'Immunology',
-                'Infectious diseases',
-                'Internal medicine',
-                'Laboratory medicine',
-                'Microbiology',
-                'Nephrology',
-                'Neuropsychiatry',
-                'Neurology',
-                'Neurosurgery',
-                'Obstetrics and gynaecology',
-                'Ophthalmology',
-                'Orthopaedics',
-                'Otorhinolaryngology',
-                'Paediatrics',
-                'Pathology',
-                'Pharmacology',
-                'Physical medicine and rehabilitation',
-                'Psychiatry',
-                'Radiology',
-                'Respiratory medicine',
-                'Rheumatology',
-                'Stomatology',
-                'Urology',
-                'Venereology'];
 
+@include ('history.speciality')
 
-  function IsThisOp($elm, $real)
-  { 
-    return (($elm==$real) ? "selected":"");
-  }
-                $spSelect="";
-                $i=1;
-                $rl=((isset($userdata->speciality)) ? $userdata->speciality:""); 
-?>
-      
-    @foreach($speciality as $spclt)  
-
-      <?php
-        $spSelect=$spSelect." <option value='".$i."' ".IsThisOp($i, $rl)." >".$spclt."</option> "; 
-        $i++;
-      ?>
-                                    
-    @endforeach
-
-
-
+<?php $rl=((isset($userdata->speciality)) ? $userdata->speciality:""); ?>
 <style type="text/css">
   .izquierda {
                 text-align:left;
@@ -129,9 +78,7 @@
        <div class="columna derecha"><strong>Medical speciality:</strong></div>
        <div class="columna izquierda"> 
                                     <select name="speciality" id="speciality" required>
-                                        <option value="0" <?php echo IsThisOp("0", $rl) ?>>none</option>
-                                        <option value="N" <?php echo IsThisOp("N", $rl) ?>>Nurse</option>
-                                       <?php  echo $spSelect; ?>
+                                       <?php  echo OptionSpecialitySelect($userdata); ?>
                                     </select>
       </div>
   </div>

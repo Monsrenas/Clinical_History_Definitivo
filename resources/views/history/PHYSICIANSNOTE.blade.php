@@ -7,6 +7,7 @@
     session_start();
     }
     $_SESSION['opcion']='bott10';
+    $pep='Pinga';
 ?>
         
 @if (isset($patient))
@@ -24,6 +25,50 @@
                 $identification=($_SESSION['identification']);  
             ?>
 @endif
+@include ('history.speciality')
+
+
+<script type="text/javascript">
+   var $NumSpecialty=0;
+   var   $NumDoc=0;
+   
+   
+    function addDoctor($specia, $user){ 
+        var $MYtextarea="";
+
+        var $others="<li> <input type='checkbox' name='list' id='doctor"+$NumDoc+"'> <label for='doctor"+$NumDoc+"'>Dr Pedro Arriaga </label> <ul class='interior'> <div><textarea style= 'resize: none;' rows='5' cols='100%' name='note[]'>  </textarea>  </div> </ul></li>";
+        
+
+            $others=$others+"<input type='hidden' name='user[]'  value='"+$user+"'>";
+    
+
+        var txt = document.getElementById($specia);
+        txt.insertAdjacentHTML('beforeend', $others);
+        $NumDoc=$NumDoc+1;
+       }
+
+
+
+    function addSpeciality($user, $Nspeciality){ 
+        var txt = document.getElementById('speciality');
+        $indice=$Nspeciality;
+        if ($indice=='####'){ $indice=txt.selectedIndex;}
+        $specialityLabel=txt.options[$indice].text;
+        $idELM=$specialityLabel.replace(/ /g, "");
+        var ELM = document.getElementById($idELM);
+        
+        if ((txt.selectedIndex>1)&&(ELM==null)) {
+                $Dbtn="<a href=\"javascript:addDoctor('"+$idELM+"','"+$user+"' )\"  class='btn btn-success' style='font-size:xx-small; align: right'><span class='glyphicon glyphicon-plus'></span> Add doctor</a>";
+
+                $others="<li><input type='checkbox' name='list' id='specialty"+$NumSpecialty+"'> <label for='specialty"+$NumSpecialty+"'> "+$specialityLabel+"</label> <ul class='interior'> <div id='"+$idELM+"''></div>  <div>"+$Dbtn+"</div></ul></li>";
+                
+                var txt = document.getElementById('menu');
+                txt.insertAdjacentHTML('beforeend', $others);
+                $NumSpecialty=$NumSpecialty+1;
+            }
+       }   
+
+</script>
 
 <style type="text/css">
     #menu * { list-style:none;}
@@ -54,9 +99,10 @@
     </ul>
 </div>
 
-<a href="javascript:addSpeciality('a')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add specialty</a>
-
-
+<select name="speciality" id="speciality" required>
+    <?php  echo OptionSpecialitySelect($patient); ?>                                
+</select>
+<a href="javascript:addSpeciality('{{ $_SESSION['user']}}','####')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add specialty</a>
 
 
 <br>  <br>
@@ -67,8 +113,8 @@
 
     <!--
 	<strong>PHYSICIANS NOTE</strong><br>
-	<textarea style="resize: none;" rows = "5" cols = "100%" name = "note" >{{ $patient->note }}</textarea> -->
-
+	<textarea style="resize: none;" rows = "5" cols = "100%" name = "note" ></textarea> -->
+    
 	<br><strong>DIAGNOSIS:</strong><br>
     <textarea style="resize: none;" rows = "5" cols = "100%" name = "diagnosis">{{ $patient->diagnosis }}</textarea>
 
@@ -99,84 +145,16 @@
        	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>
 </form>
+<?php 
+    echo  "<script type='text/javascript'> addSpeciality('".$_SESSION['user']." ',2); </script>";
+     echo  "<script type='text/javascript'> addSpeciality('".$_SESSION['user']." ',4); </script>";
+    echo  "<script type='text/javascript'> addDoctor(4,'pedro'); </script>";
+    
+ ?>
 
 </div>
 
-<script type="text/javascript">
-   var $NumSpecialty=0;
-   var   $NumDoc=0;
-   
 
-    function addSelect (){
-
-        var speciality=[ 'Allergology',
-                'Anaesthetics',
-                'Cardiology',
-                'Clinical biology',
-                'Clinical chemistry',
-                'Dermatology',
-                'Endocrinology',
-                'Gastroenterology',
-                'Geriatrics',
-                'Hematology',
-                'Immunology',
-                'Infectious diseases',
-                'Internal medicine',
-                'Laboratory medicine',
-                'Microbiology',
-                'Nephrology',
-                'Neuropsychiatry',
-                'Neurology',
-                'Neurosurgery',
-                'Obstetrics and gynaecology',
-                'Ophthalmology',
-                'Orthopaedics',
-                'Otorhinolaryngology',
-                'Paediatrics',
-                'Pathology',
-                'Pharmacology',
-                'Physical medicine and rehabilitation',
-                'Psychiatry',
-                'Radiology',
-                'Respiratory medicine',
-                'Rheumatology',
-                'Stomatology',
-                'Urology',
-                'Venereology'];
-
-    var i;
-    for (i = 0; i < speciality.length; i++) {
-                                            
-                                            $spSelect+="<option value='"+$i+"'>"+speciality[$i]+"</option> ";
-                                        } 
-
-    }   
-
-    function addDoctor($specia){ 
-        var $MYtextarea="";
-
-        var $others="<li> <input type='checkbox' name='list' id='doctor"+$NumDoc+"'> <label for='doctor"+$NumDoc+"'>Dr William Ferrer </label> <ul class='interior'> <div><textarea style= 'resize: none;' rows='5' cols='100%' name='note[]'>  </textarea>  </div> </ul></li>";
-        
-        var txt = document.getElementById($specia);
-        txt.insertAdjacentHTML('beforeend', $others);
-        $NumDoc=$NumDoc+1;
-       }
-
-
-
-    function addSpeciality($valor){ 
-
-        $Dbtn="<a href=\"javascript:addDoctor('space"+$NumSpecialty+"' )\"  class='btn btn-success' style='font-size:xx-small; align: right'><span class='glyphicon glyphicon-plus'></span> Add doctor</a>";
-
-        $others="<li><input type='checkbox' name='list' id='specialty"+$NumSpecialty+"'> <label for='specialty"+$NumSpecialty+"'> Speciality "+$NumSpecialty+"</label> <ul class='interior'> <div id='space"+$NumSpecialty+"''></div>  <div>"+$Dbtn+"</div></ul></li>";
-        
-        var txt = document.getElementById('menu');
-        txt.insertAdjacentHTML('beforeend', $others);
-        $NumSpecialty=$NumSpecialty+1;
-       }   
-
-
-</script>
 
 @endsection
 
