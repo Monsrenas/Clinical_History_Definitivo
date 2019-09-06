@@ -7,7 +7,7 @@
     session_start();
     }
     $_SESSION['opcion']='bott10';
-    $pep='Pinga';
+    $pep='Prueba de salida';
 ?>
         
 @if (isset($patient))
@@ -30,26 +30,62 @@
 
 <script type="text/javascript">
    var $NumSpecialty=0;
-   var   $NumDoc=0;
-   
-   
-    function addDoctor($specia, $user){ 
-        var $MYtextarea="";
+   var $NumDoc=0;
 
-        var $others="<li> <input type='checkbox' name='list' id='doctor"+$NumDoc+"'> <label for='doctor"+$NumDoc+"'>Dr Pedro Arriaga </label> <ul class='interior'> <div><textarea style= 'resize: none;' rows='5' cols='100%' name='note[]'>  </textarea>  </div> </ul></li>";
+   var $xUsername="";
+   var $xUser="";
+   
+   function delelm($xeme){ 
+       
+        $('#docNote'+$xeme).remove();
+        $('#userH'+$xeme).remove();
+        $('#specH'+$xeme).remove();
+        $('#dateH'+$xeme).remove();
         
+        }
 
-            $others=$others+"<input type='hidden' name='user[]'  value='"+$user+"'>";
+   function InitData($user, $username) {
+        $xUsername=$username;
+        $xUser=$user;
+
+   }
+
+
+
+    function addDoctor($specia, $user, $username, $ndate,$text){ 
+        var $MYtextarea="";
+        var $editable="readonly";
+        var $borrable="";
+
+        if ($xUser.replace(/ /g, "")==$user.replace(/ /g, "")) {$editable="";
+                            $borrable="<span class='glyphicon glyphicon glyphicon-trash' aria-hidden='true' style='font-size:xx-small; '></span>";    
+                             }
+
+        var $delBotton="<a href='javascript:delelm(\""+$NumDoc+"\")' style='background:none; border-style:none;' class='btn btn-success'> "+$borrable+" </a>";
+
+        var $others="<li id='docNote"+$NumDoc+"'> <input type='checkbox' name='list' id='doctor"+$NumDoc+"' > <label for='doctor"+$NumDoc+"'>"+$username+" </label>"+$delBotton+" <ul class='interior'> <div><textarea  "+$editable+" style= 'resize: none;' rows='5' cols='100%' name='note[1][]'>"+$text+"  </textarea>  </div> </ul></li>";
+
+            $others=$others+"<input type='hidden' id='userH"+$NumDoc+"' name='note[0][]'  value='"+$user+"'>";
+            $others=$others+"<input type='hidden' id='specH"+$NumDoc+"' name='note[2][]'  value='"+$specia+"'>";
+            $others=$others+"<input type='hidden' id='dateH"+$NumDoc+"' name='note[3][]'  value='"+$ndate+"'>";
     
+        var txt = document.getElementById('speciality');
+        $specialityLabel=txt.options[$specia].text;
+        $idELM=$specialityLabel.replace(/ /g, "");
+        txt=null;
+        while (!txt){
+                        var txt = document.getElementById($idELM);
+                        if (!txt) { addSpeciality($specia);}
+                    }
 
-        var txt = document.getElementById($specia);
         txt.insertAdjacentHTML('beforeend', $others);
         $NumDoc=$NumDoc+1;
        }
 
 
-
-    function addSpeciality($user, $Nspeciality){ 
+    function addSpeciality($Nspeciality){ 
+        var f=new Date();
+        $tdate=f.getFullYear()+"-"+f.getMonth()+"-"+f.getDate();
         var txt = document.getElementById('speciality');
         $indice=$Nspeciality;
         if ($indice=='####'){ $indice=txt.selectedIndex;}
@@ -58,9 +94,9 @@
         var ELM = document.getElementById($idELM);
         
         if ((txt.selectedIndex>1)&&(ELM==null)) {
-                $Dbtn="<a href=\"javascript:addDoctor('"+$idELM+"','"+$user+"' )\"  class='btn btn-success' style='font-size:xx-small; align: right'><span class='glyphicon glyphicon-plus'></span> Add doctor</a>";
+                $Dbtn="<div class='row d-block' style='width:80%; text-align:right;'> <a href=\"javascript:addDoctor('"+$indice+"','"+$xUser+"','"+$xUsername+"','"+$tdate+"','' )\"  class=' btn btn-success ' style='font-size:xx-small; margin:-1px; background:none; '><span class='glyphicon glyphicon-plus float-md-right ' ></span> Add doctor</a></div>";
 
-                $others="<li><input type='checkbox' name='list' id='specialty"+$NumSpecialty+"'> <label for='specialty"+$NumSpecialty+"'> "+$specialityLabel+"</label> <ul class='interior'> <div id='"+$idELM+"''></div>  <div>"+$Dbtn+"</div></ul></li>";
+                $others="<li><input type='checkbox' name='list' id='specialty"+$NumSpecialty+"'> <label for='specialty"+$NumSpecialty+"'  style='background:white; font-size:small; padding: 4px;'> "+$specialityLabel+"</label> <ul class='interior'> <div id='"+$idELM+"'></div>  <div>"+$Dbtn+"</div></ul></li>";
                 
                 var txt = document.getElementById('menu');
                 txt.insertAdjacentHTML('beforeend', $others);
@@ -87,7 +123,7 @@
 
 
 <div style="padding: 0%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); font-size: small;">
-<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
+<form  action="{{url('almacenaNotas')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
 	@csrf 	
 
 <div id='notelayout'>
@@ -102,7 +138,7 @@
 <select name="speciality" id="speciality" required>
     <?php  echo OptionSpecialitySelect($patient); ?>                                
 </select>
-<a href="javascript:addSpeciality('{{ $_SESSION['user']}}','####')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add specialty</a>
+<a href="javascript:addSpeciality('####')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add specialty</a>
 
 
 <br>  <br>
@@ -145,12 +181,13 @@
        	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>
 </form>
-<?php 
-    echo  "<script type='text/javascript'> addSpeciality('".$_SESSION['user']." ',2); </script>";
-     echo  "<script type='text/javascript'> addSpeciality('".$_SESSION['user']." ',4); </script>";
-    echo  "<script type='text/javascript'> addDoctor(4,'pedro'); </script>";
-    
+<?php   
+    echo  "<script type='text/javascript'> InitData('".$_SESSION['user']." ','".$_SESSION['username']." '); </script>";
+    foreach ($NoteList as $vl){
+        echo  "<script type='text/javascript'> addDoctor('".$vl[2]."','".$vl[0]."','".$vl[4]."','".$vl[3]."','".$vl[1]."'); </script>";
+    }
  ?>
+    
 
 </div>
 

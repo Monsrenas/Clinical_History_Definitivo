@@ -192,33 +192,46 @@ class PatientController extends Controller
         return view('history.'.$uri)->with('patient',$result); 
     }
 
-    public function ShowSpecialistNote(Request $request)
+
+    public function ShowSpecialistNote()
         {
             $classdata = new Physiciansnote;
             $result=$this->Genfind($classdata, $classdata);
             $NoteList= []; 
             $i=0;
-            if (isset($result->note))
-                {  if (is_array($result->note)) {
-                                                  foreach ($result->note as $value) {
+            if (isset($result->note[0]))
+                {  if (is_array($result->note[0])) { 
+                                                  foreach ($result->note[0] as $value) {
                                                     $Doctor=''; $DrSpeciality='';
-                                                   if (isset($result->user[$i])) {
-                                                     $drname=Login::where('user','=', $result->user[$i])->first();
-                                                     $Doctor=$drname->name." ".$drname->surname;
+                                                   if (isset($result->note[0][$i])) {
+                                                     $drname=Login::where('user','=', $result->note[0][$i])->first();
+                                                     if ($drname) {
+                                                        $Doctor=$drname->name." ".$drname->surname;
+                                                     $DrSpeciality=$drname->speciality;   
+                                                     }
+                                                
                                                    }
 
-                                                   if (isset($result->speciality[$i]))
-                                                      { $DrSpeciality=$result->speciality[$i];}
-
-                                                   
-                                                   $NoteList[]= [$value,$result->user[$i],$Doctor, $DrSpeciality ];
+                                                   $mUser=((isset($result->note[0][$i])) ? $result->note[0][$i]:"");
+                                                   $mNote=((isset($result->note[1][$i])) ? $result->note[1][$i]:"");
+                                                   $mSpec=((isset($result->note[2][$i])) ? $result->note[2][$i]:"");
+                                                   $mdate=((isset($result->note[3][$i])) ? $result->note[3][$i]:"");                                                        
+                                                   $NoteList[]=[$mUser,$mNote,$mSpec,$mdate,$Doctor,$DrSpeciality];
                                                    $i=$i+1; 
                                                 }
+
                                               } 
                 } 
                 
             return view('history.PHYSICIANSNOTE')->with('patient',$result)->with('NoteList', $NoteList);     
         }
+
+    public function almacenaNotas(Request $request){
+        $classdata=$this->modelo($request->dtt);
+        $result=$this->Genstore($request, $classdata);
+        $result=$this->ShowSpecialistNote();
+        return $result;
+    }
 
     static function TeamFind() 
     {       

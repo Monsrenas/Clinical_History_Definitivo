@@ -58,11 +58,14 @@ Route::get('PatienCng/{iden}', function($iden){
 
 /*Patient operations*/
 Route::post('almacena', 'PatientController@almacena');
+Route::post('almacenaNotas', 'PatientController@almacenaNotas');
 Route::post('pfind','PatientController@pfind');
 Route::post('add','PatientController@store');
 Route::post('Genfind','PatientController@Genfind');
 Route::get('multifind','PatientController@multifind');
 Route::get('delete','PatientController@destroy');
+
+
 
 /*User operation*/
 
