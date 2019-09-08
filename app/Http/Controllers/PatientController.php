@@ -37,10 +37,10 @@ class PatientController extends Controller
                                         $retrnurl = 'history.PATIENTDATA';}
 
         $ert=strval($request->identification);
-
         if ($ert=='') { if (!isset($_SESSION['identification'])) { $_SESSION['identification'] = '';}
         else { $ert=$_SESSION['identification'];}
         }
+        
     	$patient = Patient::where('identification','=', $ert)->first();
     	if (!is_null($patient)) { $identification=$patient->identification;
                                 $_SESSION['identification'] = $identification;

@@ -77,7 +77,7 @@
                     <div class="form-group">
 
                         <strong> Identification: </strong>
-                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" id="identification" onBlur=' this.form.submit();'  required>
+                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" onkeypress="return NoSpace(event);" id="identification" onBlur=' this.form.submit();'  required>
                     </div>    
                 </div>
             </form>
@@ -223,9 +223,42 @@
                 {
                     return false;
                 }
+
+                if(teclaPulsada==32)
+                {
+                    return false;
+                }
      
                 // devolvemos true o false dependiendo de si es numerico o no
                 return /\d/.test(String.fromCharCode(teclaPulsada));
+            }else{
+                return false;
+            }
+        }
+
+        function NoSpace(e)
+
+        {
+            // capturamos la tecla pulsada
+
+            var teclaPulsada=window.event ? window.event.keyCode:e.which;
+            // capturamos el contenido del input
+            var valor=document.getElementById("inputNumero").value;
+     
+            if(valor.length<20)
+            {
+                // 13 = tecla enter
+                // Si el usuario pulsa la tecla enter o el punto y no hay ningun otro
+                // punto
+
+                if(teclaPulsada==32)
+                {
+                    return false;
+                }
+     
+                // devolvemos true o false dependiendo de si es numerico o no
+                
+                return true;
             }else{
                 return false;
             }
