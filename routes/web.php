@@ -42,6 +42,9 @@ Route::group(['middleware' => 'IsAuten'], function(){
 								Route::get('PHYSICIANSNOTE', 'PatientController@ShowSpecialistNote');
 								Route::get('ChangePatient', 'PatientController@changePatient');
 								Route::get('PrintHistory','PatientController@TeamFind');
+								Route::get('ExamFiles', function () {
+    															return view('history.ExamFiles');
+															});
 							}		
 		}
 

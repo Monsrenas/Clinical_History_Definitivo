@@ -16,7 +16,8 @@
                         "Surgical History",
                         "Sustance Use",
                         "Physical Examination",
-                        "PHYSICIANS NOTE"
+                        "PHYSICIANS NOTE",
+                        "Exam Files"
                                         ]; 
 $rutas= [				"",
               "Interrogation",
@@ -27,10 +28,11 @@ $rutas= [				"",
                         "Surgical History",
                         "Sustance Use",
                         "PhysicalExamination",
-                        "PHYSICIANS NOTE"
+                        "PHYSICIANS NOTE",
+                        "Exam Files"
                                         ];
 
-   $bottonIcon= ["glyphicon-user","","glyphicon-folder-open","glyphicon glyphicon-tint","glyphicon-tree-deciduous","glyphicon-grain","glyphicon-scissors","glyphicon-filter","glyphicon-heart","glyphicon-edit"];
+   $bottonIcon= ["glyphicon-user","glyphicon-comment","glyphicon-folder-open","glyphicon glyphicon-tint","glyphicon-tree-deciduous","glyphicon-grain","glyphicon-scissors","glyphicon-filter","glyphicon-heart","glyphicon-edit","glyphicon-paperclip" ];
 if(!isset($_SESSION)){
     session_start();
     if(!isset($_SESSION['opcion'])){$_SESSION['opcion']=""; }
