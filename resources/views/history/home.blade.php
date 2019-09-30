@@ -2,14 +2,20 @@
     nav.navbar {
     background-color: #265C8A;
 }
-.navbar-inverse .nav li a{
+.navbar-nav .nav li a{
   color: yellow  !important; 
 }
 
 /*Mouse encima*/
-.navbar-inverse .nav li a:hover{
-  color: red;
-}
+nav.navbar ul.nav li a{
+    color:#00EDFF;
+    text-align: center;
+ }
+
+ nav.navbar ul.nav li a:hover{
+    color:white;
+    background: #324E66;
+ }
 </style>
 
 <?php 
@@ -40,6 +46,15 @@ if(!isset($_SESSION)){
       <a class="navbar-brand" href="#"><span style="margin-left: -130px; font-size: xx-large; color: white;">Clinical History</span></a>
     </div>
     <ul class="nav navbar-nav">
+      <li><a href="/Patients"><img src="../images/paciente.png" alt="" width="60px" margin="1" style=""><br>Patients</a></li>
+      <li><a href="/"><img src="../images/historia.png" alt="" width="60px" margin="1" style=""><br>History</a></li>
+      <li><a href="#"><img src="../images/consulta.png" alt="" width="60px" margin="1" style=""><br>Consultations</a></li>
+      <li><a href="#"><img src="../images/notas.png" alt="" width="60px" margin="1" style=""><br>Notes</a></li>
+      <li><a href="#"><img src="../images/examenes.png" alt="" width="60px" margin="1" style=""><br>Exams</a></li>
+      <li><a href="#"><img src="../images/reportes.png" alt="" width="60px" margin="1" style=""><br>Reports</a></li>
+      <li><a href="#"><img src="../images/cita.png" alt="" width="60px" margin="1" style=""><br>Appointment</a></li>
+  
+
       <!--
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Reports</a></li>

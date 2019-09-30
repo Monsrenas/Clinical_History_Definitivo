@@ -51,6 +51,13 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		
     });
 
+/*Main Menu*/
+
+Route::get('/Patients', function () {
+    return view('history.Patients');
+});
+
+
 Route::get('PatienCng/{iden}', function($iden){
 	if(!isset($_SESSION)){
     session_start();
